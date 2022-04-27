@@ -1,4 +1,4 @@
-# Generated from Expr.g by ANTLR 4.9.3
+# Generated from Expr.g by ANTLR 4.10.1
 from antlr4 import *
 from io import StringIO
 import sys
@@ -8,21 +8,20 @@ else:
     from typing.io import TextIO
 
 
-
 def serializedATN():
-    with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\5")
-        buf.write("\27\b\1\4\2\t\2\4\3\t\3\4\4\t\4\3\2\6\2\13\n\2\r\2\16")
-        buf.write("\2\f\3\3\3\3\3\4\6\4\22\n\4\r\4\16\4\23\3\4\3\4\2\2\5")
-        buf.write("\3\3\5\4\7\5\3\2\4\3\2\62;\4\2\f\f\"\"\2\30\2\3\3\2\2")
-        buf.write("\2\2\5\3\2\2\2\2\7\3\2\2\2\3\n\3\2\2\2\5\16\3\2\2\2\7")
-        buf.write("\21\3\2\2\2\t\13\t\2\2\2\n\t\3\2\2\2\13\f\3\2\2\2\f\n")
-        buf.write("\3\2\2\2\f\r\3\2\2\2\r\4\3\2\2\2\16\17\7-\2\2\17\6\3\2")
-        buf.write("\2\2\20\22\t\3\2\2\21\20\3\2\2\2\22\23\3\2\2\2\23\21\3")
-        buf.write("\2\2\2\23\24\3\2\2\2\24\25\3\2\2\2\25\26\b\4\2\2\26\b")
-        buf.write("\3\2\2\2\5\2\f\23\3\b\2\2")
-        return buf.getvalue()
-
+    return [
+        4,0,6,33,6,-1,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,1,
+        0,4,0,15,8,0,11,0,12,0,16,1,1,1,1,1,2,1,2,1,3,1,3,1,4,1,4,1,5,4,
+        5,28,8,5,11,5,12,5,29,1,5,1,5,0,0,6,1,1,3,2,5,3,7,4,9,5,11,6,1,0,
+        2,1,0,48,57,2,0,10,10,32,32,34,0,1,1,0,0,0,0,3,1,0,0,0,0,5,1,0,0,
+        0,0,7,1,0,0,0,0,9,1,0,0,0,0,11,1,0,0,0,1,14,1,0,0,0,3,18,1,0,0,0,
+        5,20,1,0,0,0,7,22,1,0,0,0,9,24,1,0,0,0,11,27,1,0,0,0,13,15,7,0,0,
+        0,14,13,1,0,0,0,15,16,1,0,0,0,16,14,1,0,0,0,16,17,1,0,0,0,17,2,1,
+        0,0,0,18,19,5,43,0,0,19,4,1,0,0,0,20,21,5,45,0,0,21,6,1,0,0,0,22,
+        23,5,42,0,0,23,8,1,0,0,0,24,25,5,94,0,0,25,10,1,0,0,0,26,28,7,1,
+        0,0,27,26,1,0,0,0,28,29,1,0,0,0,29,27,1,0,0,0,29,30,1,0,0,0,30,31,
+        1,0,0,0,31,32,6,5,0,0,32,12,1,0,0,0,3,0,16,29,1,6,0,0
+    ]
 
 class ExprLexer(Lexer):
 
@@ -32,25 +31,28 @@ class ExprLexer(Lexer):
 
     NUM = 1
     MES = 2
-    WS = 3
+    MINUS = 3
+    MULT = 4
+    POT = 5
+    WS = 6
 
     channelNames = [ u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN" ]
 
     modeNames = [ "DEFAULT_MODE" ]
 
     literalNames = [ "<INVALID>",
-            "'+'" ]
+            "'+'", "'-'", "'*'", "'^'" ]
 
     symbolicNames = [ "<INVALID>",
-            "NUM", "MES", "WS" ]
+            "NUM", "MES", "MINUS", "MULT", "POT", "WS" ]
 
-    ruleNames = [ "NUM", "MES", "WS" ]
+    ruleNames = [ "NUM", "MES", "MINUS", "MULT", "POT", "WS" ]
 
     grammarFileName = "Expr.g"
 
     def __init__(self, input=None, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.9.3")
+        self.checkVersion("4.10.1")
         self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
         self._predicates = None

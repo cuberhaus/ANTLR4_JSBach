@@ -1,4 +1,4 @@
-# Generated from Expr.g by ANTLR 4.9.3
+# Generated from Expr.g by ANTLR 4.10.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -8,19 +8,18 @@ if sys.version_info[1] > 5:
 else:
 	from typing.io import TextIO
 
-
 def serializedATN():
-    with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\5")
-        buf.write("\25\4\2\t\2\4\3\t\3\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3")
-        buf.write("\3\7\3\20\n\3\f\3\16\3\23\13\3\3\3\2\3\4\4\2\4\2\2\2\23")
-        buf.write("\2\6\3\2\2\2\4\t\3\2\2\2\6\7\5\4\3\2\7\b\7\2\2\3\b\3\3")
-        buf.write("\2\2\2\t\n\b\3\1\2\n\13\7\3\2\2\13\21\3\2\2\2\f\r\f\4")
-        buf.write("\2\2\r\16\7\4\2\2\16\20\5\4\3\5\17\f\3\2\2\2\20\23\3\2")
-        buf.write("\2\2\21\17\3\2\2\2\21\22\3\2\2\2\22\5\3\2\2\2\23\21\3")
-        buf.write("\2\2\2\3\21")
-        return buf.getvalue()
-
+    return [
+        4,1,6,28,2,0,7,0,2,1,7,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,23,8,1,10,1,12,1,26,9,1,1,1,
+        0,1,2,2,0,2,0,0,29,0,4,1,0,0,0,2,7,1,0,0,0,4,5,3,2,1,0,5,6,5,0,0,
+        1,6,1,1,0,0,0,7,8,6,1,-1,0,8,9,5,1,0,0,9,24,1,0,0,0,10,11,10,5,0,
+        0,11,12,5,5,0,0,12,23,3,2,1,5,13,14,10,4,0,0,14,15,5,4,0,0,15,23,
+        3,2,1,5,16,17,10,3,0,0,17,18,5,3,0,0,18,23,3,2,1,4,19,20,10,2,0,
+        0,20,21,5,2,0,0,21,23,3,2,1,3,22,10,1,0,0,0,22,13,1,0,0,0,22,16,
+        1,0,0,0,22,19,1,0,0,0,23,26,1,0,0,0,24,22,1,0,0,0,24,25,1,0,0,0,
+        25,3,1,0,0,0,26,24,1,0,0,0,2,22,24
+    ]
 
 class ExprParser ( Parser ):
 
@@ -32,9 +31,10 @@ class ExprParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "<INVALID>", "'+'" ]
+    literalNames = [ "<INVALID>", "<INVALID>", "'+'", "'-'", "'*'", "'^'" ]
 
-    symbolicNames = [ "<INVALID>", "NUM", "MES", "WS" ]
+    symbolicNames = [ "<INVALID>", "NUM", "MES", "MINUS", "MULT", "POT", 
+                      "WS" ]
 
     RULE_root = 0
     RULE_expr = 1
@@ -44,11 +44,14 @@ class ExprParser ( Parser ):
     EOF = Token.EOF
     NUM=1
     MES=2
-    WS=3
+    MINUS=3
+    MULT=4
+    POT=5
+    WS=6
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.9.3")
+        self.checkVersion("4.10.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -111,6 +114,15 @@ class ExprParser ( Parser ):
                 return self.getTypedRuleContext(ExprParser.ExprContext,i)
 
 
+        def POT(self):
+            return self.getToken(ExprParser.POT, 0)
+
+        def MULT(self):
+            return self.getToken(ExprParser.MULT, 0)
+
+        def MINUS(self):
+            return self.getToken(ExprParser.MINUS, 0)
+
         def MES(self):
             return self.getToken(ExprParser.MES, 0)
 
@@ -131,27 +143,73 @@ class ExprParser ( Parser ):
             self.state = 8
             self.match(ExprParser.NUM)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 15
+            self.state = 24
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,0,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,1,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    localctx = ExprParser.ExprContext(self, _parentctx, _parentState)
-                    self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                    self.state = 10
-                    if not self.precpred(self._ctx, 2):
-                        from antlr4.error.Errors import FailedPredicateException
-                        raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                    self.state = 11
-                    self.match(ExprParser.MES)
-                    self.state = 12
-                    self.expr(3) 
-                self.state = 17
+                    self.state = 22
+                    self._errHandler.sync(self)
+                    la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
+                    if la_ == 1:
+                        localctx = ExprParser.ExprContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        self.state = 10
+                        if not self.precpred(self._ctx, 5):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
+                        self.state = 11
+                        self.match(ExprParser.POT)
+                        self.state = 12
+                        self.expr(5)
+                        pass
+
+                    elif la_ == 2:
+                        localctx = ExprParser.ExprContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        self.state = 13
+                        if not self.precpred(self._ctx, 4):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
+                        self.state = 14
+                        self.match(ExprParser.MULT)
+                        self.state = 15
+                        self.expr(5)
+                        pass
+
+                    elif la_ == 3:
+                        localctx = ExprParser.ExprContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        self.state = 16
+                        if not self.precpred(self._ctx, 3):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
+                        self.state = 17
+                        self.match(ExprParser.MINUS)
+                        self.state = 18
+                        self.expr(4)
+                        pass
+
+                    elif la_ == 4:
+                        localctx = ExprParser.ExprContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        self.state = 19
+                        if not self.precpred(self._ctx, 2):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
+                        self.state = 20
+                        self.match(ExprParser.MES)
+                        self.state = 21
+                        self.expr(3)
+                        pass
+
+             
+                self.state = 26
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,0,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,1,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -175,6 +233,18 @@ class ExprParser ( Parser ):
 
     def expr_sempred(self, localctx:ExprContext, predIndex:int):
             if predIndex == 0:
+                return self.precpred(self._ctx, 5)
+         
+
+            if predIndex == 1:
+                return self.precpred(self._ctx, 4)
+         
+
+            if predIndex == 2:
+                return self.precpred(self._ctx, 3)
+         
+
+            if predIndex == 3:
                 return self.precpred(self._ctx, 2)
          
 
