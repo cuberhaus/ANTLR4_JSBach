@@ -75,6 +75,12 @@ class ExprParser ( Parser ):
         def getRuleIndex(self):
             return ExprParser.RULE_root
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitRoot" ):
+                return visitor.visitRoot(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -128,6 +134,12 @@ class ExprParser ( Parser ):
 
         def getRuleIndex(self):
             return ExprParser.RULE_expr
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr" ):
+                return visitor.visitExpr(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
