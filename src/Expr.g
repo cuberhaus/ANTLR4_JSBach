@@ -1,6 +1,6 @@
 grammar Expr;
 root : expr EOF ;
-expr :	<assoc=left> expr POT expr
+expr :	<assoc=right> expr POT expr
 	| expr MULT expr
 	| expr MINUS expr
 	| expr MES expr
