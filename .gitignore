@@ -9,3 +9,5 @@ venv/
 
 # java
 *.class
+# antlr4
+*.tokens
