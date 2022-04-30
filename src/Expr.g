@@ -12,7 +12,7 @@ expr :	<assoc=right> expr POT expr
     | COMMENT
 ;
 
-/* COMMENT: '%' ~[\r\n]* '\r'? '\n'; */ 
+ASSIGN: ID '<-' expr ; // x <- 12
 COMMENT : '~~~' .*? '~~~' -> skip ;
 NEWLINE:'\r'? '\n' ; // return newlines to parser (end-statement signal)
 NUM : [0-9]+ ;
@@ -20,4 +20,4 @@ MES : '+' ;
 MINUS : '-' ;
 MULT : '*' ;
 POT : '^' ;
-WS : [ \t]+ -> skip ;
+WS : [ \t\n\r]+ -> skip ; // skip spaces, tabs, newlines, \r (windows)
