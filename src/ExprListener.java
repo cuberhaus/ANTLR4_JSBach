@@ -1,4 +1,4 @@
-// Generated from Expr.g4 by ANTLR 4.10.1
+// Generated from Expr.g by ANTLR 4.10.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -16,6 +16,16 @@ public interface ExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRoot(ExprParser.RootContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExprParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(ExprParser.StatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExprParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(ExprParser.StatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExprParser#expr}.
 	 * @param ctx the parse tree

@@ -5,6 +5,7 @@ MES=4
 MINUS=5
 MULT=6
 POT=7
+WS=8
 '+'=4
 '-'=5
 '*'=6
