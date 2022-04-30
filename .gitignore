@@ -11,3 +11,4 @@ venv/
 *.class
 # antlr4
 *.tokens
+*.interp
