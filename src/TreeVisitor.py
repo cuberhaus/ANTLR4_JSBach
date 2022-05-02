@@ -12,6 +12,7 @@ else:
 class TreeVisitor(ExprVisitor):
     def __init__(self):
         self.nivell = 0
+        self.ids = {}
 
     def visitExpr(self, ctx):
         l = list(ctx.getChildren())
@@ -49,3 +50,58 @@ class TreeVisitor(ExprVisitor):
             print(l)
         return self.visitChildren(ctx)
 
+    # Visit a parse tree produced by ExprParser#statement.
+    def visitStatement(self, ctx:ExprParser.StatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExprParser#pot.
+    def visitPot(self, ctx:ExprParser.PotContext):
+        op1, op, op2 = list(ctx.getChildren())
+        numero1 = self.visit(op1)
+        numero2 = self.visit(op2)
+        return numero1 ** numero2
+        # return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExprParser#div_mult_mod.
+    def visitDiv_mult_mod(self, ctx:ExprParser.Div_mult_modContext):
+        op1, op, op2 = list(ctx.getChildren())
+        if op == '*':
+            numero1 = self.visit(op1)
+            numero2 = self.visit(op2)
+            return op1 * op2
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExprParser#num.
+    def visitNum(self, ctx:ExprParser.NumContext):
+        num = list(ctx.getChildren())
+        return num
+        # return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExprParser#mes_minus.
+    def visitMes_minus(self, ctx:ExprParser.Mes_minusContext):
+        op1, op, op2 = list(ctx.getChildren)
+        numero1 = self.visit(op1)
+        numero2 = self.visit(op2)
+        if op == '+':
+            return numero1 + numero2
+        if op == '-':
+            return numero1 - numero2
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#id.
+    def visitId(self, ctx:ExprParser.IdContext):
+        op1 = list(ctx.getChildren())
+        number = ids[op1]
+        return number
+        # return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExprParser#assign.
+    def visitAssign(self, ctx:ExprParser.AssignContext):
+        op1, op, op2 = list(ctx.getChildren())
+        ids 
+        return self.visitChildren(ctx)
