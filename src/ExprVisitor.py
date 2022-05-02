@@ -24,5 +24,10 @@ class ExprVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ExprParser#assign.
+    def visitAssign(self, ctx:ExprParser.AssignContext):
+        return self.visitChildren(ctx)
+
+
 
 del ExprParser
