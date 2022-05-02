@@ -1,26 +1,24 @@
 grammar Expr;
-root : statement+ EOF ;
+root: statement+ EOF;
 
-statement : expr NEWLINE #expression
-    // | ID '<-' expr NEWLINE
-    | assign    # assign_id
-    | NEWLINE   # newline
-    ;
-expr :	<assoc=right> expr POT expr #pot
-	| expr MULT expr    #mult
-	| expr MINUS expr   #minus
-	| expr MES expr     #mes
-	| NUM               #num
-    | ID                #id
-;
-assign : ID '<-' expr NEWLINE; // x <- 12
+statement: expr | assign;
+expr:
+	<assoc = right> expr POT expr	# pot
+	| expr (DIV | MULT | MOD)		# div_mult_mod
+	| expr (MES | MINUS) expr		# mes_minus
+	| NUM							# num
+	| ID							# id;
+assign: ID '<-' expr; // x <- 12
 
-ID : [a-zA-Z]+ ; // match identifiers
-NUM : [0-9]+ ;
-NEWLINE :'\r'? '\n' ; // return newlines to parser (end-statement signal)
-WS : [ \t]+ -> skip ; // skip spaces, tabs, newlines, \r (windows)
-MES : '+' ;
-MINUS : '-' ;
-MULT : '*' ;
-POT : '^' ;
-// COMMENT : '~~~' .*? '~~~' -> skip ;
+ID: [a-zA-Z]+; // match identifiers
+NUM: [0-9]+;
+// NEWLINE :'\r'? '\n' ; // return newlines to parser (end-statement signal)
+WS:
+	[ \t\n]+ -> skip; // skip spaces, tabs, newlines, \r (windows)
+DIV: '/';
+MOD: '%';
+MES: '+';
+MINUS: '-';
+MULT: '*';
+POT: '^';
+COMMENT : '~~~' .*? '~~~' -> skip ;
