@@ -4,6 +4,8 @@ if __name__ is not None and "." in __name__:
 else:
     from ExprParser import ExprParser
     from ExprVisitor import ExprVisitor
+
+
 class TreeVisitor(ExprVisitor):
     def __init__(self):
         self.nivell = 0
@@ -11,18 +13,22 @@ class TreeVisitor(ExprVisitor):
     def visitExpr(self, ctx):
         l = list(ctx.getChildren())
         if len(l) == 1:
-            print("  " * self.nivell +
-                  ExprParser.symbolicNames[l[0].getSymbol().type] +
-                  '(' +l[0].getText() + ')')
+            print(
+                "  " * self.nivell
+                + ExprParser.symbolicNames[l[0].getSymbol().type]
+                + "("
+                + l[0].getText()
+                + ")"
+            )
         elif len(l) > 1:
-            if l[1].getText() == '^':
-                print('  ' *  self.nivell + 'POT(^)')
-            elif l[1].getText() == '*':
-                print('  ' *  self.nivell + 'MULT(*)')
-            elif l[1].getText() == '+':
-                print('  ' *  self.nivell + 'MES(+)')
-            elif l[1].getText() == '-':
-                print('  ' *  self.nivell + 'MINUS(-)')
+            if l[1].getText() == "^":
+                print("  " * self.nivell + "POT(^)")
+            elif l[1].getText() == "*":
+                print("  " * self.nivell + "MULT(*)")
+            elif l[1].getText() == "+":
+                print("  " * self.nivell + "MES(+)")
+            elif l[1].getText() == "-":
+                print("  " * self.nivell + "MINUS(-)")
 
             self.nivell += 1
             # for i in l:
