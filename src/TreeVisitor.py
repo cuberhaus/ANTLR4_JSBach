@@ -72,7 +72,7 @@ class TreeVisitor(ExprVisitor):
         else:
             numero1 = self.visit(l[0])
             numero2 = self.visit(l[2])
-            op = self.visit(l[1])
+            op = l[1].getText()
             return numero1 ** numero2
         return self.visitChildren(ctx)
 
@@ -80,18 +80,19 @@ class TreeVisitor(ExprVisitor):
     # Visit a parse tree produced by ExprParser#div_mult_mod.
     def visitDiv_mult_mod(self, ctx:ExprParser.Div_mult_modContext):
         l = list(ctx.getChildren())
-
         if len(l) == 1:
             print("Error")
+        # elif len(l) == 3:
         else:
             numero1 = self.visit(l[0])
             numero2 = self.visit(l[2])
-            op = self.visit(l[1])
+            op = l[1].getText()
             if op == '*':
-                return op1 * op2
+                return numero1 * numero2
             elif op == '%':
-                return op1 % op2
-            
+                return numero1 % numero2
+            elif op == '/':
+                return numero1 / numero2
         return self.visitChildren(ctx)
 
 
@@ -112,12 +113,14 @@ class TreeVisitor(ExprVisitor):
         else:
             numero1 = self.visit(l[0])
             numero2 = self.visit(l[2])
-            op = self.visit(l[1])
+            op = l[1].getText()
+            # print(op)
+            # op = op.getText()
             if op == '+':
                 return numero1 + numero2
             if op == '-':
                 return numero1 - numero2
-        return numero1 + numero2
+        # return numero1 + numero2
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#id.

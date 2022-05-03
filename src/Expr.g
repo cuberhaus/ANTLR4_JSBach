@@ -4,7 +4,7 @@ root: statement+ EOF;
 statement: expr | assign;
 expr:
 	<assoc = right> expr POT expr	# pot
-	| expr (DIV | MULT | MOD)		# div_mult_mod
+	| expr (DIV | MULT | MOD) expr		# div_mult_mod
 	| expr (MES | MINUS) expr		# mes_minus
 	| NUM							# num
 	| ID							# id;
