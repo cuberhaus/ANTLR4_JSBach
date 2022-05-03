@@ -13,7 +13,7 @@ class TreeVisitor(ExprVisitor):
     def __init__(self):
         self.nivell = 0
         self.ids = {}
-
+        
     # def visitExpr(self, ctx):
     #     l = list(ctx.getChildren())
     #     if len(l) == 1:
@@ -41,14 +41,24 @@ class TreeVisitor(ExprVisitor):
     #         self.visit(l[2])
     #         self.nivell -= 1
 
+    # Visit a parse tree produced by ExprParser#root.
+    def visitRoot(self, ctx:ExprParser.RootContext):
+        l = list(ctx.getChildren())
+        # x = 0
+        for i in l:
+            self.visit(i)
+            # print(x)
+            # x += 1
+        return self.visitChildren(ctx)
+
     # Visit a parse tree produced by ExprParser#assign.
     def visitAssign(self, ctx:ExprParser.AssignContext):
         l = list(ctx.getChildren())
         
         # id = ctx.getText()
         # value = self.visit(l[2])
-        for i in l:
-            print(l)
+        # for i in l:
+        #     print(l)
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#statement.
