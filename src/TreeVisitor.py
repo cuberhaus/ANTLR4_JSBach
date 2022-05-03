@@ -14,36 +14,37 @@ class TreeVisitor(ExprVisitor):
         self.nivell = 0
         self.ids = {}
 
-    def visitExpr(self, ctx):
-        l = list(ctx.getChildren())
-        if len(l) == 1:
-            print(
-                "  " * self.nivell
-                + ExprParser.symbolicNames[l[0].getSymbol().type]
-                + "("
-                + l[0].getText()
-                + ")"
-            )
-        elif len(l) > 1:
-            if l[1].getText() == "^":
-                print("  " * self.nivell + "POT(^)")
-            elif l[1].getText() == "*":
-                print("  " * self.nivell + "MULT(*)")
-            elif l[1].getText() == "+":
-                print("  " * self.nivell + "MES(+)")
-            elif l[1].getText() == "-":
-                print("  " * self.nivell + "MINUS(-)")
+    # def visitExpr(self, ctx):
+    #     l = list(ctx.getChildren())
+    #     if len(l) == 1:
+    #         print(
+    #             "  " * self.nivell
+    #             + ExprParser.symbolicNames[l[0].getSymbol().type]
+    #             + "("
+    #             + l[0].getText()
+    #             + ")"
+    #         )
+    #     elif len(l) > 1:
+    #         if l[1].getText() == "^":
+    #             print("  " * self.nivell + "POT(^)")
+    #         elif l[1].getText() == "*":
+    #             print("  " * self.nivell + "MULT(*)")
+    #         elif l[1].getText() == "+":
+    #             print("  " * self.nivell + "MES(+)")
+    #         elif l[1].getText() == "-":
+    #             print("  " * self.nivell + "MINUS(-)")
 
-            self.nivell += 1
-            # for i in l:
-            #     print(i.getText())
-            self.visit(l[0])
-            self.visit(l[2])
-            self.nivell -= 1
+    #         self.nivell += 1
+    #         # for i in l:
+    #         #     print(i.getText())
+    #         self.visit(l[0])
+    #         self.visit(l[2])
+    #         self.nivell -= 1
 
-    # Visit a parse tree produced by ExprParser#assign_id.
-    def visitAssign_id(self, ctx:ExprParser.Assign_idContext):
+    # Visit a parse tree produced by ExprParser#assign.
+    def visitAssign(self, ctx:ExprParser.AssignContext):
         l = list(ctx.getChildren())
+        
         # id = ctx.getText()
         # value = self.visit(l[2])
         for i in l:
@@ -52,56 +53,83 @@ class TreeVisitor(ExprVisitor):
 
     # Visit a parse tree produced by ExprParser#statement.
     def visitStatement(self, ctx:ExprParser.StatementContext):
+        l = list(ctx.getChildren())
+        if len(l) == 1:
+            numero1 = self.visit(l[0])
+            print(numero1)
+        else:
+            print("Error")
+            
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by ExprParser#pot.
     def visitPot(self, ctx:ExprParser.PotContext):
-        op1, op, op2 = list(ctx.getChildren())
-        numero1 = self.visit(op1)
-        numero2 = self.visit(op2)
-        return numero1 ** numero2
-        # return self.visitChildren(ctx)
+        l = list(ctx.getChildren())
+
+        if len(l) == 1:
+            print("Error")
+        else:
+            numero1 = self.visit(l[0])
+            numero2 = self.visit(l[2])
+            op = self.visit(l[1])
+            return numero1 ** numero2
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by ExprParser#div_mult_mod.
     def visitDiv_mult_mod(self, ctx:ExprParser.Div_mult_modContext):
-        op1, op, op2 = list(ctx.getChildren())
-        if op == '*':
-            numero1 = self.visit(op1)
-            numero2 = self.visit(op2)
-            return op1 * op2
+        l = list(ctx.getChildren())
+
+        if len(l) == 1:
+            print("Error")
+        else:
+            numero1 = self.visit(l[0])
+            numero2 = self.visit(l[2])
+            op = self.visit(l[1])
+            if op == '*':
+                return op1 * op2
+            elif op == '%':
+                return op1 % op2
+            
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by ExprParser#num.
     def visitNum(self, ctx:ExprParser.NumContext):
-        num = list(ctx.getChildren())
+        l = list(ctx.getChildren())
+        # num = self.visit(l[0])
+        num = int(l[0].getText())
         return num
         # return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by ExprParser#mes_minus.
     def visitMes_minus(self, ctx:ExprParser.Mes_minusContext):
-        op1, op, op2 = list(ctx.getChildren)
-        numero1 = self.visit(op1)
-        numero2 = self.visit(op2)
-        if op == '+':
-            return numero1 + numero2
-        if op == '-':
-            return numero1 - numero2
+        l = list(ctx.getChildren())
+        if len(l) == 1:
+            print("error")
+        else:
+            numero1 = self.visit(l[0])
+            numero2 = self.visit(l[2])
+            op = self.visit(l[1])
+            if op == '+':
+                return numero1 + numero2
+            if op == '-':
+                return numero1 - numero2
+        return numero1 + numero2
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#id.
     def visitId(self, ctx:ExprParser.IdContext):
-        op1 = list(ctx.getChildren())
-        number = ids[op1]
+        l = list(ctx.getChildren())
+        identifier = l[0]
+        number = ids[identifier]
         return number
         # return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by ExprParser#assign.
     def visitAssign(self, ctx:ExprParser.AssignContext):
-        op1, op, op2 = list(ctx.getChildren())
-        ids 
+        l = list(ctx.getChildren())
         return self.visitChildren(ctx)
