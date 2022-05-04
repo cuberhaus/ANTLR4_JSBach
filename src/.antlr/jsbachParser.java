@@ -1,4 +1,4 @@
-// Generated from jsbach.g4 by ANTLR 4.10.1
+// Generated from /home/pol/ANTLR4_JSBach/src/jsbach.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class jsbachParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.10.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -102,14 +102,6 @@ public class jsbachParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_root; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterRoot(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitRoot(this);
-		}
 	}
 
 	public final RootContext root() throws RecognitionException {
@@ -159,14 +151,6 @@ public class jsbachParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitStatement(this);
-		}
 	}
 
 	public final StatementContext statement() throws RecognitionException {
@@ -223,14 +207,6 @@ public class jsbachParser extends Parser {
 		}
 		public TerminalNode POT() { return getToken(jsbachParser.POT, 0); }
 		public PotContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterPot(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitPot(this);
-		}
 	}
 	public static class Div_mult_modContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -243,26 +219,10 @@ public class jsbachParser extends Parser {
 		public TerminalNode MULT() { return getToken(jsbachParser.MULT, 0); }
 		public TerminalNode MOD() { return getToken(jsbachParser.MOD, 0); }
 		public Div_mult_modContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterDiv_mult_mod(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitDiv_mult_mod(this);
-		}
 	}
 	public static class NumContext extends ExprContext {
 		public TerminalNode NUM() { return getToken(jsbachParser.NUM, 0); }
 		public NumContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterNum(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitNum(this);
-		}
 	}
 	public static class Mes_minusContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -274,26 +234,10 @@ public class jsbachParser extends Parser {
 		public TerminalNode MES() { return getToken(jsbachParser.MES, 0); }
 		public TerminalNode MINUS() { return getToken(jsbachParser.MINUS, 0); }
 		public Mes_minusContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterMes_minus(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitMes_minus(this);
-		}
 	}
 	public static class IdContext extends ExprContext {
 		public TerminalNode ID() { return getToken(jsbachParser.ID, 0); }
 		public IdContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterId(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitId(this);
-		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -430,14 +374,6 @@ public class jsbachParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assign; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterAssign(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitAssign(this);
-		}
 	}
 
 	public final AssignContext assign() throws RecognitionException {
@@ -485,35 +421,19 @@ public class jsbachParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000b+\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
-		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0001\u0000\u0004\u0000\n\b"+
-		"\u0000\u000b\u0000\f\u0000\u000b\u0001\u0000\u0001\u0000\u0001\u0001\u0001"+
-		"\u0001\u0003\u0001\u0012\b\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0003"+
-		"\u0002\u0017\b\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001"+
-		"\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0005\u0002\"\b"+
-		"\u0002\n\u0002\f\u0002%\t\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0000\u0001\u0004\u0004\u0000\u0002\u0004\u0006\u0000"+
-		"\u0002\u0002\u0000\u0005\u0006\t\t\u0001\u0000\u0007\b,\u0000\t\u0001"+
-		"\u0000\u0000\u0000\u0002\u0011\u0001\u0000\u0000\u0000\u0004\u0016\u0001"+
-		"\u0000\u0000\u0000\u0006&\u0001\u0000\u0000\u0000\b\n\u0003\u0002\u0001"+
-		"\u0000\t\b\u0001\u0000\u0000\u0000\n\u000b\u0001\u0000\u0000\u0000\u000b"+
-		"\t\u0001\u0000\u0000\u0000\u000b\f\u0001\u0000\u0000\u0000\f\r\u0001\u0000"+
-		"\u0000\u0000\r\u000e\u0005\u0000\u0000\u0001\u000e\u0001\u0001\u0000\u0000"+
-		"\u0000\u000f\u0012\u0003\u0004\u0002\u0000\u0010\u0012\u0003\u0006\u0003"+
-		"\u0000\u0011\u000f\u0001\u0000\u0000\u0000\u0011\u0010\u0001\u0000\u0000"+
-		"\u0000\u0012\u0003\u0001\u0000\u0000\u0000\u0013\u0014\u0006\u0002\uffff"+
-		"\uffff\u0000\u0014\u0017\u0005\u0003\u0000\u0000\u0015\u0017\u0005\u0002"+
-		"\u0000\u0000\u0016\u0013\u0001\u0000\u0000\u0000\u0016\u0015\u0001\u0000"+
-		"\u0000\u0000\u0017#\u0001\u0000\u0000\u0000\u0018\u0019\n\u0005\u0000"+
-		"\u0000\u0019\u001a\u0005\n\u0000\u0000\u001a\"\u0003\u0004\u0002\u0005"+
-		"\u001b\u001c\n\u0004\u0000\u0000\u001c\u001d\u0007\u0000\u0000\u0000\u001d"+
-		"\"\u0003\u0004\u0002\u0005\u001e\u001f\n\u0003\u0000\u0000\u001f \u0007"+
-		"\u0001\u0000\u0000 \"\u0003\u0004\u0002\u0004!\u0018\u0001\u0000\u0000"+
-		"\u0000!\u001b\u0001\u0000\u0000\u0000!\u001e\u0001\u0000\u0000\u0000\""+
-		"%\u0001\u0000\u0000\u0000#!\u0001\u0000\u0000\u0000#$\u0001\u0000\u0000"+
-		"\u0000$\u0005\u0001\u0000\u0000\u0000%#\u0001\u0000\u0000\u0000&\'\u0005"+
-		"\u0002\u0000\u0000\'(\u0005\u0001\u0000\u0000()\u0003\u0004\u0002\u0000"+
-		")\u0007\u0001\u0000\u0000\u0000\u0005\u000b\u0011\u0016!#";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\r-\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\3\2\6\2\f\n\2\r\2\16\2\r\3\2\3\2\3\3\3\3\5\3\24\n\3"+
+		"\3\4\3\4\3\4\5\4\31\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4$\n\4\f"+
+		"\4\16\4\'\13\4\3\5\3\5\3\5\3\5\3\5\2\3\6\6\2\4\6\b\2\4\4\2\7\b\13\13\3"+
+		"\2\t\n\2.\2\13\3\2\2\2\4\23\3\2\2\2\6\30\3\2\2\2\b(\3\2\2\2\n\f\5\4\3"+
+		"\2\13\n\3\2\2\2\f\r\3\2\2\2\r\13\3\2\2\2\r\16\3\2\2\2\16\17\3\2\2\2\17"+
+		"\20\7\2\2\3\20\3\3\2\2\2\21\24\5\6\4\2\22\24\5\b\5\2\23\21\3\2\2\2\23"+
+		"\22\3\2\2\2\24\5\3\2\2\2\25\26\b\4\1\2\26\31\7\5\2\2\27\31\7\4\2\2\30"+
+		"\25\3\2\2\2\30\27\3\2\2\2\31%\3\2\2\2\32\33\f\7\2\2\33\34\7\f\2\2\34$"+
+		"\5\6\4\7\35\36\f\6\2\2\36\37\t\2\2\2\37$\5\6\4\7 !\f\5\2\2!\"\t\3\2\2"+
+		"\"$\5\6\4\6#\32\3\2\2\2#\35\3\2\2\2# \3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3"+
+		"\2\2\2&\7\3\2\2\2\'%\3\2\2\2()\7\4\2\2)*\7\3\2\2*+\5\6\4\2+\t\3\2\2\2"+
+		"\7\r\23\30#%";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

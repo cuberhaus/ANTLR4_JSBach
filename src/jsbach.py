@@ -1,14 +1,14 @@
 import sys
 from antlr4 import *
-from ExprLexer import ExprLexer
-from ExprParser import ExprParser
+from jsbachLexer import jsbachLexer
+from jsbachParser import jsbachParser
 from TreeVisitor import TreeVisitor
 
 # input_stream = InputStream(input('? '))
 input_stream = FileStream(sys.argv[1])
-lexer = ExprLexer(input_stream)
+lexer = jsbachLexer(input_stream)
 token_stream = CommonTokenStream(lexer)
-parser = ExprParser(token_stream)
+parser = jsbachParser(token_stream)
 tree = parser.root() 
 visitor = TreeVisitor()
 visitor.visit(tree)

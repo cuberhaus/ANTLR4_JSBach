@@ -2,67 +2,45 @@ from re import L
 
 
 if __name__ is not None and "." in __name__:
-    from .ExprParser import ExprParser
-    from .ExprVisitor import ExprVisitor
+    from jsbachParser import jsbachParser
+    from jsbachVisitor import jsbachVisitor
 else:
-    from ExprParser import ExprParser
-    from ExprVisitor import ExprVisitor
+    from jsbachParser import jsbachParser
+    from jsbachVisitor import jsbachVisitor
 
 
-class TreeVisitor(ExprVisitor):
+class TreeVisitor(jsbachVisitor):
     def __init__(self):
         self.nivell = 0
         self.ids = {}
         
-    # def visitExpr(self, ctx):
-    #     l = list(ctx.getChildren())
-    #     if len(l) == 1:
-    #         print(
-    #             "  " * self.nivell
-    #             + ExprParser.symbolicNames[l[0].getSymbol().type]
-    #             + "("
-    #             + l[0].getText()
-    #             + ")"
-    #         )
-    #     elif len(l) > 1:
-    #         if l[1].getText() == "^":
-    #             print("  " * self.nivell + "POT(^)")
-    #         elif l[1].getText() == "*":
-    #             print("  " * self.nivell + "MULT(*)")
-    #         elif l[1].getText() == "+":
-    #             print("  " * self.nivell + "MES(+)")
-    #         elif l[1].getText() == "-":
-    #             print("  " * self.nivell + "MINUS(-)")
-
-    #         self.nivell += 1
-    #         # for i in l:
-    #         #     print(i.getText())
-    #         self.visit(l[0])
-    #         self.visit(l[2])
-    #         self.nivell -= 1
-
     # Visit a parse tree produced by ExprParser#root.
-    def visitRoot(self, ctx:ExprParser.RootContext):
+    def visitRoot(self, ctx:jsbachParser.RootContext):
         l = list(ctx.getChildren())
-        # x = 0
         for i in l:
             self.visit(i)
-            # print(x)
-            # x += 1
         # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#assign.
-    def visitAssign(self, ctx:ExprParser.AssignContext):
+    def visitAssign(self, ctx:jsbachParser.AssignContext):
         l = list(ctx.getChildren())
-        
-        id = ctx.getText()
+
+        if len(l) == 1:
+            print("Error")
+        else:
+            # id = self.visit(l[0])
+            id = l[0].getText()
+            numero = self.visit(l[2])
+            op = l[1].getText()
+            
+            self.ids[id] = numero
         # value = self.visit(l[2])
         # for i in l:
         #     print(l)
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#statement.
-    def visitStatement(self, ctx:ExprParser.StatementContext):
+    def visitStatement(self, ctx:jsbachParser.StatementContext):
         l = list(ctx.getChildren())
         if len(l) == 1:
             numero1 = self.visit(l[0])
@@ -74,7 +52,7 @@ class TreeVisitor(ExprVisitor):
 
 
     # Visit a parse tree produced by ExprParser#pot.
-    def visitPot(self, ctx:ExprParser.PotContext):
+    def visitPot(self, ctx:jsbachParser.PotContext):
         l = list(ctx.getChildren())
 
         if len(l) == 1:
@@ -88,7 +66,7 @@ class TreeVisitor(ExprVisitor):
 
 
     # Visit a parse tree produced by ExprParser#div_mult_mod.
-    def visitDiv_mult_mod(self, ctx:ExprParser.Div_mult_modContext):
+    def visitDiv_mult_mod(self, ctx:jsbachParser.Div_mult_modContext):
         l = list(ctx.getChildren())
         if len(l) == 1:
             print("Error")
@@ -107,7 +85,7 @@ class TreeVisitor(ExprVisitor):
 
 
     # Visit a parse tree produced by ExprParser#num.
-    def visitNum(self, ctx:ExprParser.NumContext):
+    def visitNum(self, ctx:jsbachParser.NumContext):
         l = list(ctx.getChildren())
         # num = self.visit(l[0])
         num = int(l[0].getText())
@@ -116,7 +94,7 @@ class TreeVisitor(ExprVisitor):
 
 
     # Visit a parse tree produced by ExprParser#mes_minus.
-    def visitMes_minus(self, ctx:ExprParser.Mes_minusContext):
+    def visitMes_minus(self, ctx:jsbachParser.Mes_minusContext):
         l = list(ctx.getChildren())
         if len(l) == 1:
             print("error")
@@ -134,15 +112,9 @@ class TreeVisitor(ExprVisitor):
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#id.
-    def visitId(self, ctx:ExprParser.IdContext):
+    def visitId(self, ctx:jsbachParser.IdContext):
         l = list(ctx.getChildren())
         identifier = l[0]
-        number = ids[identifier]
+        number = self.ids[identifier]
         return number
-        # return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ExprParser#assign.
-    def visitAssign(self, ctx:ExprParser.AssignContext):
-        l = list(ctx.getChildren())
         return self.visitChildren(ctx)
