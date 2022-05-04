@@ -49,7 +49,7 @@ class TreeVisitor(ExprVisitor):
             self.visit(i)
             # print(x)
             # x += 1
-        return self.visitChildren(ctx)
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#assign.
     def visitAssign(self, ctx:ExprParser.AssignContext):

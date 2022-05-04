@@ -2,7 +2,7 @@ grammar Expr;
 
 root: statement+ EOF;
 
-statement: expr | assign;
+statement: assign;
 
 expr:
 	<assoc = right> expr POT expr	# pot
