@@ -1,4 +1,4 @@
-grammar Expr;
+grammar jsbach;
 
 root: statement+ EOF;
 

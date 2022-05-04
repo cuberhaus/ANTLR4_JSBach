@@ -1,4 +1,4 @@
-// Generated from Expr.g by ANTLR 4.10.1
+// Generated from jsbach.g4 by ANTLR 4.10.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class ExprParser extends Parser {
+public class jsbachParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.10.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -74,7 +74,7 @@ public class ExprParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Expr.g"; }
+	public String getGrammarFileName() { return "jsbach.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -85,13 +85,13 @@ public class ExprParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public ExprParser(TokenStream input) {
+	public jsbachParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	public static class RootContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(ExprParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(jsbachParser.EOF, 0); }
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
@@ -104,11 +104,11 @@ public class ExprParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_root; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterRoot(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterRoot(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitRoot(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitRoot(this);
 		}
 	}
 
@@ -158,11 +158,11 @@ public class ExprParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_statement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterStatement(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitStatement(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitStatement(this);
 		}
 	}
 
@@ -205,15 +205,15 @@ public class ExprParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode POT() { return getToken(ExprParser.POT, 0); }
+		public TerminalNode POT() { return getToken(jsbachParser.POT, 0); }
 		public PotContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterPot(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterPot(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitPot(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitPot(this);
 		}
 	}
 	public static class Div_mult_modContext extends ExprContext {
@@ -223,29 +223,29 @@ public class ExprParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode DIV() { return getToken(ExprParser.DIV, 0); }
-		public TerminalNode MULT() { return getToken(ExprParser.MULT, 0); }
-		public TerminalNode MOD() { return getToken(ExprParser.MOD, 0); }
+		public TerminalNode DIV() { return getToken(jsbachParser.DIV, 0); }
+		public TerminalNode MULT() { return getToken(jsbachParser.MULT, 0); }
+		public TerminalNode MOD() { return getToken(jsbachParser.MOD, 0); }
 		public Div_mult_modContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterDiv_mult_mod(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterDiv_mult_mod(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitDiv_mult_mod(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitDiv_mult_mod(this);
 		}
 	}
 	public static class NumContext extends ExprContext {
-		public TerminalNode NUM() { return getToken(ExprParser.NUM, 0); }
+		public TerminalNode NUM() { return getToken(jsbachParser.NUM, 0); }
 		public NumContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterNum(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterNum(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitNum(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitNum(this);
 		}
 	}
 	public static class Mes_minusContext extends ExprContext {
@@ -255,28 +255,28 @@ public class ExprParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode MES() { return getToken(ExprParser.MES, 0); }
-		public TerminalNode MINUS() { return getToken(ExprParser.MINUS, 0); }
+		public TerminalNode MES() { return getToken(jsbachParser.MES, 0); }
+		public TerminalNode MINUS() { return getToken(jsbachParser.MINUS, 0); }
 		public Mes_minusContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterMes_minus(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterMes_minus(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitMes_minus(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitMes_minus(this);
 		}
 	}
 	public static class IdContext extends ExprContext {
-		public TerminalNode ID() { return getToken(ExprParser.ID, 0); }
+		public TerminalNode ID() { return getToken(jsbachParser.ID, 0); }
 		public IdContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterId(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterId(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitId(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitId(this);
 		}
 	}
 
@@ -406,7 +406,7 @@ public class ExprParser extends Parser {
 	}
 
 	public static class AssignContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(ExprParser.ID, 0); }
+		public TerminalNode ID() { return getToken(jsbachParser.ID, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -416,11 +416,11 @@ public class ExprParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_assign; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).enterAssign(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).enterAssign(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ExprListener ) ((ExprListener)listener).exitAssign(this);
+			if ( listener instanceof jsbachListener ) ((jsbachListener)listener).exitAssign(this);
 		}
 	}
 

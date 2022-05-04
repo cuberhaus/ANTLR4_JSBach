@@ -1,4 +1,4 @@
-# Generated from Expr.g by ANTLR 4.10.1
+# Generated from jsbach.g4 by ANTLR 4.10.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -25,9 +25,9 @@ def serializedATN():
         0,38,39,3,4,2,0,39,7,1,0,0,0,4,11,20,31,33
     ]
 
-class ExprParser ( Parser ):
+class jsbachParser ( Parser ):
 
-    grammarFileName = "Expr.g"
+    grammarFileName = "jsbach.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -78,17 +78,17 @@ class ExprParser ( Parser ):
             self.parser = parser
 
         def EOF(self):
-            return self.getToken(ExprParser.EOF, 0)
+            return self.getToken(jsbachParser.EOF, 0)
 
         def statement(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(ExprParser.StatementContext)
+                return self.getTypedRuleContexts(jsbachParser.StatementContext)
             else:
-                return self.getTypedRuleContext(ExprParser.StatementContext,i)
+                return self.getTypedRuleContext(jsbachParser.StatementContext,i)
 
 
         def getRuleIndex(self):
-            return ExprParser.RULE_root
+            return jsbachParser.RULE_root
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitRoot" ):
@@ -101,7 +101,7 @@ class ExprParser ( Parser ):
 
     def root(self):
 
-        localctx = ExprParser.RootContext(self, self._ctx, self.state)
+        localctx = jsbachParser.RootContext(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_root)
         self._la = 0 # Token type
         try:
@@ -115,11 +115,11 @@ class ExprParser ( Parser ):
                 self.state = 11 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==ExprParser.ID):
+                if not (_la==jsbachParser.ID):
                     break
 
             self.state = 13
-            self.match(ExprParser.EOF)
+            self.match(jsbachParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -137,11 +137,11 @@ class ExprParser ( Parser ):
             self.parser = parser
 
         def assign(self):
-            return self.getTypedRuleContext(ExprParser.AssignContext,0)
+            return self.getTypedRuleContext(jsbachParser.AssignContext,0)
 
 
         def getRuleIndex(self):
-            return ExprParser.RULE_statement
+            return jsbachParser.RULE_statement
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitStatement" ):
@@ -154,7 +154,7 @@ class ExprParser ( Parser ):
 
     def statement(self):
 
-        localctx = ExprParser.StatementContext(self, self._ctx, self.state)
+        localctx = jsbachParser.StatementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_statement)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -178,7 +178,7 @@ class ExprParser ( Parser ):
 
 
         def getRuleIndex(self):
-            return ExprParser.RULE_expr
+            return jsbachParser.RULE_expr
 
      
         def copyFrom(self, ctx:ParserRuleContext):
@@ -187,18 +187,18 @@ class ExprParser ( Parser ):
 
     class PotContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a ExprParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a jsbachParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def expr(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(ExprParser.ExprContext)
+                return self.getTypedRuleContexts(jsbachParser.ExprContext)
             else:
-                return self.getTypedRuleContext(ExprParser.ExprContext,i)
+                return self.getTypedRuleContext(jsbachParser.ExprContext,i)
 
         def POT(self):
-            return self.getToken(ExprParser.POT, 0)
+            return self.getToken(jsbachParser.POT, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPot" ):
@@ -209,22 +209,22 @@ class ExprParser ( Parser ):
 
     class Div_mult_modContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a ExprParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a jsbachParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def expr(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(ExprParser.ExprContext)
+                return self.getTypedRuleContexts(jsbachParser.ExprContext)
             else:
-                return self.getTypedRuleContext(ExprParser.ExprContext,i)
+                return self.getTypedRuleContext(jsbachParser.ExprContext,i)
 
         def DIV(self):
-            return self.getToken(ExprParser.DIV, 0)
+            return self.getToken(jsbachParser.DIV, 0)
         def MULT(self):
-            return self.getToken(ExprParser.MULT, 0)
+            return self.getToken(jsbachParser.MULT, 0)
         def MOD(self):
-            return self.getToken(ExprParser.MOD, 0)
+            return self.getToken(jsbachParser.MOD, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDiv_mult_mod" ):
@@ -235,12 +235,12 @@ class ExprParser ( Parser ):
 
     class NumContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a ExprParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a jsbachParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def NUM(self):
-            return self.getToken(ExprParser.NUM, 0)
+            return self.getToken(jsbachParser.NUM, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitNum" ):
@@ -251,20 +251,20 @@ class ExprParser ( Parser ):
 
     class Mes_minusContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a ExprParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a jsbachParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def expr(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(ExprParser.ExprContext)
+                return self.getTypedRuleContexts(jsbachParser.ExprContext)
             else:
-                return self.getTypedRuleContext(ExprParser.ExprContext,i)
+                return self.getTypedRuleContext(jsbachParser.ExprContext,i)
 
         def MES(self):
-            return self.getToken(ExprParser.MES, 0)
+            return self.getToken(jsbachParser.MES, 0)
         def MINUS(self):
-            return self.getToken(ExprParser.MINUS, 0)
+            return self.getToken(jsbachParser.MINUS, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitMes_minus" ):
@@ -275,12 +275,12 @@ class ExprParser ( Parser ):
 
     class IdContext(ExprContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a ExprParser.ExprContext
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a jsbachParser.ExprContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
         def ID(self):
-            return self.getToken(ExprParser.ID, 0)
+            return self.getToken(jsbachParser.ID, 0)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitId" ):
@@ -293,7 +293,7 @@ class ExprParser ( Parser ):
     def expr(self, _p:int=0):
         _parentctx = self._ctx
         _parentState = self.state
-        localctx = ExprParser.ExprContext(self, self._ctx, _parentState)
+        localctx = jsbachParser.ExprContext(self, self._ctx, _parentState)
         _prevctx = localctx
         _startState = 4
         self.enterRecursionRule(localctx, 4, self.RULE_expr, _p)
@@ -303,20 +303,20 @@ class ExprParser ( Parser ):
             self.state = 20
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [ExprParser.NUM]:
-                localctx = ExprParser.NumContext(self, localctx)
+            if token in [jsbachParser.NUM]:
+                localctx = jsbachParser.NumContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
 
                 self.state = 18
-                self.match(ExprParser.NUM)
+                self.match(jsbachParser.NUM)
                 pass
-            elif token in [ExprParser.ID]:
-                localctx = ExprParser.IdContext(self, localctx)
+            elif token in [jsbachParser.ID]:
+                localctx = jsbachParser.IdContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 19
-                self.match(ExprParser.ID)
+                self.match(jsbachParser.ID)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -334,20 +334,20 @@ class ExprParser ( Parser ):
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,2,self._ctx)
                     if la_ == 1:
-                        localctx = ExprParser.PotContext(self, ExprParser.ExprContext(self, _parentctx, _parentState))
+                        localctx = jsbachParser.PotContext(self, jsbachParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 22
                         if not self.precpred(self._ctx, 5):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
                         self.state = 23
-                        self.match(ExprParser.POT)
+                        self.match(jsbachParser.POT)
                         self.state = 24
                         self.expr(5)
                         pass
 
                     elif la_ == 2:
-                        localctx = ExprParser.Div_mult_modContext(self, ExprParser.ExprContext(self, _parentctx, _parentState))
+                        localctx = jsbachParser.Div_mult_modContext(self, jsbachParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 25
                         if not self.precpred(self._ctx, 4):
@@ -355,7 +355,7 @@ class ExprParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
                         self.state = 26
                         _la = self._input.LA(1)
-                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ExprParser.DIV) | (1 << ExprParser.MOD) | (1 << ExprParser.MULT))) != 0)):
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << jsbachParser.DIV) | (1 << jsbachParser.MOD) | (1 << jsbachParser.MULT))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
@@ -365,7 +365,7 @@ class ExprParser ( Parser ):
                         pass
 
                     elif la_ == 3:
-                        localctx = ExprParser.Mes_minusContext(self, ExprParser.ExprContext(self, _parentctx, _parentState))
+                        localctx = jsbachParser.Mes_minusContext(self, jsbachParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 28
                         if not self.precpred(self._ctx, 3):
@@ -373,7 +373,7 @@ class ExprParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
                         self.state = 29
                         _la = self._input.LA(1)
-                        if not(_la==ExprParser.MES or _la==ExprParser.MINUS):
+                        if not(_la==jsbachParser.MES or _la==jsbachParser.MINUS):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
@@ -404,14 +404,14 @@ class ExprParser ( Parser ):
             self.parser = parser
 
         def ID(self):
-            return self.getToken(ExprParser.ID, 0)
+            return self.getToken(jsbachParser.ID, 0)
 
         def expr(self):
-            return self.getTypedRuleContext(ExprParser.ExprContext,0)
+            return self.getTypedRuleContext(jsbachParser.ExprContext,0)
 
 
         def getRuleIndex(self):
-            return ExprParser.RULE_assign
+            return jsbachParser.RULE_assign
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAssign" ):
@@ -424,14 +424,14 @@ class ExprParser ( Parser ):
 
     def assign(self):
 
-        localctx = ExprParser.AssignContext(self, self._ctx, self.state)
+        localctx = jsbachParser.AssignContext(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_assign)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 36
-            self.match(ExprParser.ID)
+            self.match(jsbachParser.ID)
             self.state = 37
-            self.match(ExprParser.T__0)
+            self.match(jsbachParser.T__0)
             self.state = 38
             self.expr(0)
         except RecognitionException as re:

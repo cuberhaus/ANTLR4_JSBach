@@ -1,4 +1,4 @@
-# Generated from Expr.g by ANTLR 4.10.1
+# Generated from jsbach.g4 by ANTLR 4.10.1
 from antlr4 import *
 from io import StringIO
 import sys
@@ -36,7 +36,7 @@ def serializedATN():
         0,29,34,39,62,1,6,0,0
     ]
 
-class ExprLexer(Lexer):
+class jsbachLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -68,7 +68,7 @@ class ExprLexer(Lexer):
     ruleNames = [ "T__0", "ID", "NUM", "WS", "DIV", "MOD", "MES", "MINUS", 
                   "MULT", "POT", "COMMENT" ]
 
-    grammarFileName = "Expr.g"
+    grammarFileName = "jsbach.g4"
 
     def __init__(self, input=None, output:TextIO = sys.stdout):
         super().__init__(input, output)

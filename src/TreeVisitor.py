@@ -55,7 +55,7 @@ class TreeVisitor(ExprVisitor):
     def visitAssign(self, ctx:ExprParser.AssignContext):
         l = list(ctx.getChildren())
         
-        # id = ctx.getText()
+        id = ctx.getText()
         # value = self.visit(l[2])
         # for i in l:
         #     print(l)
