@@ -13,7 +13,9 @@ statement: if
     | expr
     | assign
     ;
-
+lectura: '<?>' ID ;
+escriptura: '<!>' (ID|STRING)+;
+STRING
 expr: <assoc = right> expr POT expr #pot // Cannot name this expressions as separate declarations
 	| expr (DIV | MULT | MOD) expr #div_mult_mod
 	| expr (MES | MINUS) expr #mes_minus

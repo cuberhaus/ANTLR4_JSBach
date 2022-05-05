@@ -9,8 +9,11 @@ venv/
 
 # java
 *.class
-# antlr4
+*.antlr4
 *.tokens
 *.interp
-
 *.log
+
+# intelliJ
+*.idea
+*.iml
