@@ -12,3 +12,5 @@ venv/
 # antlr4
 *.tokens
 *.interp
+
+*.log

@@ -14,6 +14,11 @@ class jsbachVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by jsbachParser#bloc.
+    def visitBloc(self, ctx:jsbachParser.BlocContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by jsbachParser#statement.
     def visitStatement(self, ctx:jsbachParser.StatementContext):
         return self.visitChildren(ctx)
@@ -41,6 +46,36 @@ class jsbachVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by jsbachParser#id.
     def visitId(self, ctx:jsbachParser.IdContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsbachParser#definir_procediment.
+    def visitDefinir_procediment(self, ctx:jsbachParser.Definir_procedimentContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsbachParser#parametros.
+    def visitParametros(self, ctx:jsbachParser.ParametrosContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsbachParser#if.
+    def visitIf(self, ctx:jsbachParser.IfContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsbachParser#else_condition.
+    def visitElse_condition(self, ctx:jsbachParser.Else_conditionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsbachParser#while.
+    def visitWhile(self, ctx:jsbachParser.WhileContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsbachParser#condicio.
+    def visitCondicio(self, ctx:jsbachParser.CondicioContext):
         return self.visitChildren(ctx)
 
 

@@ -20,6 +20,13 @@ class TreeVisitor(jsbachVisitor):
             self.visit(i)
         # return self.visitChildren(ctx)
 
+        
+    def visitBloc(self, ctx: jsbachParser.BlocContext):
+        children = list(ctx.getChildren())
+        for i in children:
+            self.visit(i)
+        # return self.visitChildren(ctx)
+
     # Visit a parse tree produced by ExprParser#assign.
     def visitAssign(self, ctx: jsbachParser.AssignContext):
         children = list(ctx.getChildren())
@@ -54,6 +61,10 @@ class TreeVisitor(jsbachVisitor):
         else:
             numero1 = self.visit(children[0])
             numero2 = self.visit(children[2])
+            if isinstance(numero1,str):
+                numero1 = self.ids[numero1]
+            if isinstance(numero2,str):
+                numero2 = self.ids[numero2]
             # op = children[1].getText()
             return numero1 ** numero2
         return self.visitChildren(ctx)
@@ -67,6 +78,10 @@ class TreeVisitor(jsbachVisitor):
         else:
             numero1 = self.visit(children[0])
             numero2 = self.visit(children[2])
+            if isinstance(numero1,str):
+                numero1 = self.ids[numero1]
+            if isinstance(numero2,str):
+                numero2 = self.ids[numero2]
             op = children[1].getText()
             if op == '*':
                 return numero1 * numero2
@@ -92,6 +107,10 @@ class TreeVisitor(jsbachVisitor):
         else:
             numero1 = self.visit(children[0])
             numero2 = self.visit(children[2])
+            if isinstance(numero1,str):
+                numero1 = self.ids[numero1]
+            if isinstance(numero2,str):
+                numero2 = self.ids[numero2]
             op = children[1].getText()
             # print(op)
             # op = op.getText()
@@ -104,8 +123,9 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by ExprParser#id.
     def visitId(self, ctx: jsbachParser.IdContext):
-        # children = list(ctx.getChildren())
-        # identifier = children[0]
+        children = list(ctx.getChildren())
+        identifier = children[0].getText()
+        return identifier
         # number = self.ids[identifier]
         # return number
-        return self.visitChildren(ctx)
+        # return self.visitChildren(ctx)

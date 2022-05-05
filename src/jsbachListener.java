@@ -17,6 +17,16 @@ public interface jsbachListener extends ParseTreeListener {
 	 */
 	void exitRoot(jsbachParser.RootContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link jsbachParser#bloc}.
+	 * @param ctx the parse tree
+	 */
+	void enterBloc(jsbachParser.BlocContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link jsbachParser#bloc}.
+	 * @param ctx the parse tree
+	 */
+	void exitBloc(jsbachParser.BlocContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link jsbachParser#statement}.
 	 * @param ctx the parse tree
 	 */
@@ -86,6 +96,66 @@ public interface jsbachListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitId(jsbachParser.IdContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link jsbachParser#definir_procediment}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefinir_procediment(jsbachParser.Definir_procedimentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link jsbachParser#definir_procediment}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefinir_procediment(jsbachParser.Definir_procedimentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link jsbachParser#parametros}.
+	 * @param ctx the parse tree
+	 */
+	void enterParametros(jsbachParser.ParametrosContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link jsbachParser#parametros}.
+	 * @param ctx the parse tree
+	 */
+	void exitParametros(jsbachParser.ParametrosContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link jsbachParser#if}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf(jsbachParser.IfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link jsbachParser#if}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf(jsbachParser.IfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link jsbachParser#else_condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterElse_condition(jsbachParser.Else_conditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link jsbachParser#else_condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitElse_condition(jsbachParser.Else_conditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link jsbachParser#while}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhile(jsbachParser.WhileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link jsbachParser#while}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhile(jsbachParser.WhileContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link jsbachParser#condicio}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondicio(jsbachParser.CondicioContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link jsbachParser#condicio}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondicio(jsbachParser.CondicioContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link jsbachParser#assign}.
 	 * @param ctx the parse tree
