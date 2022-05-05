@@ -2,9 +2,9 @@
 
 Command line compilation:
 ```
-antlr4 Expr.g
-antlr4 -Dlanguage=Python3 -no-listener -visitor Expr.g
-grun Expr root -gui
+antlr4 jsbach.g4
+antlr4 -Dlanguage=Python3 -no-listener -visitor jsbach.g4
+grun jsbach root -gui
 ```
 
 Execute program:
