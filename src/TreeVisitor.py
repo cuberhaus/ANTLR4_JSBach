@@ -20,7 +20,6 @@ class TreeVisitor(jsbachVisitor):
             self.visit(i)
         # return self.visitChildren(ctx)
 
-        
     def visitBloc(self, ctx: jsbachParser.BlocContext):
         children = list(ctx.getChildren())
         for i in children:
@@ -61,9 +60,9 @@ class TreeVisitor(jsbachVisitor):
         else:
             numero1 = self.visit(children[0])
             numero2 = self.visit(children[2])
-            if isinstance(numero1,str):
+            if isinstance(numero1, str):
                 numero1 = self.ids[numero1]
-            if isinstance(numero2,str):
+            if isinstance(numero2, str):
                 numero2 = self.ids[numero2]
             # op = children[1].getText()
             return numero1 ** numero2
@@ -78,9 +77,9 @@ class TreeVisitor(jsbachVisitor):
         else:
             numero1 = self.visit(children[0])
             numero2 = self.visit(children[2])
-            if isinstance(numero1,str):
+            if isinstance(numero1, str):
                 numero1 = self.ids[numero1]
-            if isinstance(numero2,str):
+            if isinstance(numero2, str):
                 numero2 = self.ids[numero2]
             op = children[1].getText()
             if op == '*':
@@ -107,9 +106,9 @@ class TreeVisitor(jsbachVisitor):
         else:
             numero1 = self.visit(children[0])
             numero2 = self.visit(children[2])
-            if isinstance(numero1,str):
+            if isinstance(numero1, str):
                 numero1 = self.ids[numero1]
-            if isinstance(numero2,str):
+            if isinstance(numero2, str):
                 numero2 = self.ids[numero2]
             op = children[1].getText()
             # print(op)

@@ -2,6 +2,7 @@ grammar jsbach;
 
 root: bloc EOF;
 
+// this statement is needed because we have to call blocks from code and root has EOF, we only want one EOF
 bloc : statement+;
 
 statement: if
@@ -13,9 +14,7 @@ statement: if
     | expr
     | assign
     ;
-lectura: '<?>' ID ;
-escriptura: '<!>' (ID|STRING)+;
-STRING
+
 expr: <assoc = right> expr POT expr #pot // Cannot name this expressions as separate declarations
 	| expr (DIV | MULT | MOD) expr #div_mult_mod
 	| expr (MES | MINUS) expr #mes_minus
@@ -23,6 +22,8 @@ expr: <assoc = right> expr POT expr #pot // Cannot name this expressions as sepa
 	| ID #id
 ;
 
+lectura: '<?>' ID ;
+escriptura: '<!>' (ID|STRING)+;
 usar_procediment: ID parametres;
 definir_procediment : ID parametres '|:' bloc ':|';
 parametres: ID*;
@@ -34,12 +35,14 @@ assign: ID '<-' expr; // x <- 12
 
 ID: [a-zA-Z]+; // match identifiers
 NUM: [0-9]+;
-// NEWLINE :'\r'? '\n' ; // return newlines to parser (end-statement signal)
+STRING : '"' .*? '"' ;
 WS: [ \t\n]+ -> skip; // skip spaces, tabs, newlines, \r (windows)
+COMMENT : '~~~' .*? '~~~' -> skip ;
+
 DIV: '/';
 MOD: '%';
 MES: '+';
 MINUS: '-';
 MULT: '*';
 POT: '^';
-COMMENT : '~~~' .*? '~~~' -> skip ;
+// NEWLINE :'\r'? '\n' ; // return newlines to parser (end-statement signal)
