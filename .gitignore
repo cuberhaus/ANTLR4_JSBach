@@ -17,3 +17,10 @@ venv/
 # intelliJ
 *.idea
 *.iml
+
+jsbachBaseListener.java
+jsbachLexer.java
+jsbachListener.java
+jsbachParser.java
+jsbachParser.py
+jsbachVisitor.py
