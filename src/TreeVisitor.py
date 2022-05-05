@@ -128,3 +128,44 @@ class TreeVisitor(jsbachVisitor):
         # number = self.ids[identifier]
         # return number
         # return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by jsbachParser#lectura.
+    def visitLectura(self, ctx:jsbachParser.LecturaContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#escriptura.
+    def visitEscriptura(self, ctx:jsbachParser.EscripturaContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#usar_procediment.
+    def visitUsar_procediment(self, ctx:jsbachParser.Usar_procedimentContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#definir_procediment.
+    def visitDefinir_procediment(self, ctx:jsbachParser.Definir_procedimentContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#usar_parametres.
+    def visitUsar_parametres(self, ctx:jsbachParser.Usar_parametresContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#definir_parametres.
+    def visitDefinir_parametres(self, ctx:jsbachParser.Definir_parametresContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#if.
+    def visitIf(self, ctx:jsbachParser.IfContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#else.
+    def visitElse(self, ctx:jsbachParser.ElseContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#while.
+    def visitWhile(self, ctx:jsbachParser.WhileContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#condicio.
+    def visitCondicio(self, ctx:jsbachParser.CondicioContext):
+        return self.visitChildren(ctx)
