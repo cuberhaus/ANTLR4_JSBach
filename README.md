@@ -2,10 +2,10 @@
 
 Command line compilation:
 ```
-antlr4 Expr.g
-antlr4 -Dlanguage=Python3 -no-listener -visitor Expr.g
-grun Expr root -gui
+antlr4 jsbach.g4
+antlr4 -Dlanguage=Python3 -no-listener -visitor jsbach.g
+grun jsbach root -gui
 ```
 
-python3 script2.py
+python3 jsbach.py
 
