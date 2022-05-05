@@ -9,7 +9,7 @@ venv/
 
 # java
 *.class
-*.antlr4
+*.antlr/
 *.tokens
 *.interp
 *.log
