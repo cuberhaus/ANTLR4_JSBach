@@ -215,11 +215,20 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#if.
     def visitIf(self, ctx: jsbachParser.IfContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+        condition_value = self.visit(children[1])
+        if condition_value:
+            self.visit(children[4])
+        elif len(children) == 7:
+            self.visit(children[6])
+            
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#else.
     def visitElse(self, ctx: jsbachParser.ElseContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+        self.visit(children[3])
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#while.
     def visitWhile(self, ctx: jsbachParser.WhileContext):

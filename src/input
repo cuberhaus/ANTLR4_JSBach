@@ -1,9 +1,8 @@
 Main |:
-    x <- 2 = 2
-    <!> "Main" x
-    MainSec x 2+2
-:|
-
-MainSec a b |:
-    <!> "This function has been called correctly! " a b
+    x <- 3
+    if 1 > x |:
+        <!> "If is working!"
+    :| else |:
+        <!> "else block!"
+    :|
 :|
