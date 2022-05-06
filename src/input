@@ -1,6 +1,6 @@
 Main a b c |:
     <!> "Default main Bach"
-    MainSec
+    MainSec 2+2 3 4
 :|
 
 MainSec |:

@@ -175,7 +175,16 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#usar_procediment.
     def visitUsar_procediment(self, ctx: jsbachParser.Usar_procedimentContext):
-        
+        children = list(ctx.getChildren())
+        nom_funcio = children[0].getText()
+        if nom_funcio not in self.procediments:
+            raise Exception("La funció " + nom_funcio + ", no existeix.")
+        else:
+            argument_values = self.visit(children[1]) # definir_arguments
+            if len(argument_values) != len(self.procediments[nom_funcio][0]):
+                raise Exception("El nombre d'arguments en la crida de la funció" + nom_funcio + " no es correspon amb el nombre d'arguments que admet")
+            else:
+                #self.procediments[nom_funcio][0] = argument_values
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#definir_procediment.
@@ -184,7 +193,7 @@ class TreeVisitor(jsbachVisitor):
         n = len(children)
         nom_procediment = children[0].getText()  # El primer fill conté en nom de la funció
         if nom_procediment in self.procediments:
-            raise Exception("Funció ja declarada")
+            raise Exception("La funció" + nom_procediment + "ja ha estat declarada.")
         else:
             variables = self.visit(children[1])  # El segon fill conté els arguments de la funció
             variables_set = set(variables)
@@ -196,7 +205,13 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#definir_arguments.
     def visitDefinir_arguments(self, ctx: jsbachParser.Definir_argumentsContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+        argument_values = []
+        for child in children:
+            argument_value = self.visit(child)
+            argument_values.append(argument_value)
+        return argument_values
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#arguments.
     def visitArguments(self, ctx: jsbachParser.ArgumentsContext):
