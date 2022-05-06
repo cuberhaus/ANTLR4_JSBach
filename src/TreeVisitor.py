@@ -12,6 +12,10 @@ class TreeVisitor(jsbachVisitor):
     def __init__(self):
         self.nivell = 0
         self.ids = {}
+        self.procediments = {}
+
+    def begin(self, param):
+        pass
 
     # Visit a parse tree produced by ExprParser#root.
     def visitRoot(self, ctx: jsbachParser.RootContext):
@@ -128,9 +132,8 @@ class TreeVisitor(jsbachVisitor):
         # return number
         # return self.visitChildren(ctx)
 
-
     # Visit a parse tree produced by jsbachParser#lectura.
-    def visitLectura(self, ctx:jsbachParser.LecturaContext):
+    def visitLectura(self, ctx: jsbachParser.LecturaContext):
         children = list(ctx.getChildren())
 
         if len(children) == 1:
@@ -142,7 +145,7 @@ class TreeVisitor(jsbachVisitor):
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#escriptura.
-    def visitEscriptura(self, ctx:jsbachParser.EscripturaContext):
+    def visitEscriptura(self, ctx: jsbachParser.EscripturaContext):
         children = list(ctx.getChildren())
         n = len(children)
         current_children = 1
@@ -161,34 +164,49 @@ class TreeVisitor(jsbachVisitor):
         # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#usar_procediment.
-    def visitUsar_procediment(self, ctx:jsbachParser.Usar_procedimentContext):
+    def visitUsar_procediment(self, ctx: jsbachParser.Usar_procedimentContext):
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#definir_procediment.
-    def visitDefinir_procediment(self, ctx:jsbachParser.Definir_procedimentContext):
-        
+    def visitDefinir_procediment(self, ctx: jsbachParser.Definir_procedimentContext):
+        children = list(ctx.getChildren())
+        n = len(children)
+        nom_procediment = children[0].getText()
+        if nom_procediment in self.procediments:
+            raise("Funció ja declarada")
+        else:
+            variables = self.visit(children[1])
+            variables_set = set(variables)
+            if len(variables) != len(variables_set):
+                raise("El procediment conté variables amb noms repetits!")
+            procediment = children[3]
+            self.procediments[nom_procediment] = [variables, procediment]
+        # return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#definir_arguments.
+    def visitDefinir_arguments(self, ctx:jsbachParser.Definir_argumentsContext):
         return self.visitChildren(ctx)
 
-    # Visit a parse tree produced by jsbachParser#usar_parametres.
-    def visitUsar_parametres(self, ctx:jsbachParser.Usar_parametresContext):
-        return self.visitChildren(ctx)
-
-    # Visit a parse tree produced by jsbachParser#definir_parametres.
-    def visitDefinir_parametres(self, ctx:jsbachParser.Definir_parametresContext):
-        return self.visitChildren(ctx)
+    # Visit a parse tree produced by jsbachParser#arguments.
+    def visitArguments(self, ctx:jsbachParser.ArgumentsContext):
+        children = list(ctx.getChildren())
+        arguments = []
+        for i in children:
+            arguments.append(i.getText())
+        return arguments
 
     # Visit a parse tree produced by jsbachParser#if.
-    def visitIf(self, ctx:jsbachParser.IfContext):
+    def visitIf(self, ctx: jsbachParser.IfContext):
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#else.
-    def visitElse(self, ctx:jsbachParser.ElseContext):
+    def visitElse(self, ctx: jsbachParser.ElseContext):
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#while.
-    def visitWhile(self, ctx:jsbachParser.WhileContext):
+    def visitWhile(self, ctx: jsbachParser.WhileContext):
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#condicio.
-    def visitCondicio(self, ctx:jsbachParser.CondicioContext):
+    def visitCondicio(self, ctx: jsbachParser.CondicioContext):
         return self.visitChildren(ctx)
