@@ -170,7 +170,7 @@ class TreeVisitor(jsbachVisitor):
             else:
                 print(self.ids[-1][identifier], end="")
             current_children += 1
-        print("\r")
+        print("\n")
         # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#usar_procediment.
@@ -190,7 +190,11 @@ class TreeVisitor(jsbachVisitor):
         i = 0
         n = len(argument_ids)
         while i < n:
-            self.ids[-1][argument_ids[i]] = argument_values[i]
+            # print(argument_values[i])
+            argument_value = argument_values[i]
+            if isinstance(argument_value, str):
+                argument_value = self.ids[-2][argument_value]
+            self.ids[-1][argument_ids[i]] = argument_value
             i += 1
         # self.procediments[nom_funcio][0] = argument_values
         self.visit(procediment)
@@ -244,4 +248,33 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#condicio.
     def visitCondicio(self, ctx: jsbachParser.CondicioContext):
-        return self.visitChildren(ctx)
+
+        children = list(ctx.getChildren())
+        if len(children) == 1:
+            print("Error")
+        # elif len(l) == 3:
+        else:
+            numero1 = self.visit(children[0])
+            numero2 = self.visit(children[2])
+            if isinstance(numero1, str):
+                numero1 = self.ids[-1][numero1]
+            if isinstance(numero2, str):
+                numero2 = self.ids[-1][numero2]
+            op = children[1].getText()
+            value = 0
+            if op == '=':
+                value = numero1 == numero2
+            elif op == "/=":
+                value = numero1 != numero2
+            elif op == '<':
+                value = numero1 < numero2
+            elif op == '>':
+                value = numero1 > numero2
+            elif op == "<=":
+                value = numero1 <= numero2
+            elif op == ">=":
+                value = numero1 >= numero2
+            if value:
+                return 1
+            return 0
+        # return self.visitChildren(ctx)

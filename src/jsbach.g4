@@ -16,7 +16,8 @@ statement:
 	| assign;
 
 expr:
-	<assoc = right> expr POT expr	# pot // Cannot name this expressions as separate declarations
+	'(' expr ')'					# parenthesis
+	| <assoc = right> expr POT expr	# pot // Cannot name this expressions as separate declarations
 	| expr (DIV | MULT | MOD) expr	# div_mult_mod
 	| expr (MES | MINUS) expr		# mes_minus
 	| NUM							# num
@@ -35,7 +36,7 @@ if:
 else: 'else' '|:' newlines bloc ':|' newlines;
 while: 'while' condicio '|:' newlines bloc ':|' newlines+;
 condicio: expr ('=' | '/=' | '<' | '>' | '<=' | '>=') expr;
-assign: VARIABLE_ID '<-' expr newlines;
+assign: VARIABLE_ID '<-' (expr | condicio) newlines;
 
 FUNCTION_ID:
 	[A-Z] [a-zA-Z]*; // functions start with a capital letter

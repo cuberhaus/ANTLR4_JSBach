@@ -1,8 +1,9 @@
 Main |:
-    <!> "Main"
-    MainSec 2+4
+    x <- 2 = 2
+    <!> "Main" x
+    MainSec x 2+2
 :|
 
-MainSec a |:
-    <!> "This function has been called correctly! " a
+MainSec a b |:
+    <!> "This function has been called correctly! " a b
 :|
