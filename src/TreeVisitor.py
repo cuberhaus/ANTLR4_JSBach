@@ -71,13 +71,7 @@ class TreeVisitor(jsbachVisitor):
         if len(children) == 1:
             print("Error")
         else:
-            numero1 = self.visit(children[0])
-            numero2 = self.visit(children[2])
-            if isinstance(numero1, str):
-                numero1 = self.ids[-1][numero1]
-            if isinstance(numero2, str):
-                numero2 = self.ids[-1][numero2]
-            # op = children[1].getText()
+            numero1, numero2, op = self.get_values_from_children(children)
             return numero1 ** numero2
         return self.visitChildren(ctx)
 
@@ -88,13 +82,7 @@ class TreeVisitor(jsbachVisitor):
             print("Error")
         # elif len(l) == 3:
         else:
-            numero1 = self.visit(children[0])
-            numero2 = self.visit(children[2])
-            if isinstance(numero1, str):
-                numero1 = self.ids[-1][numero1]
-            if isinstance(numero2, str):
-                numero2 = self.ids[-1][numero2]
-            op = children[1].getText()
+            numero1, numero2, op = self.get_values_from_children(children)
             if op == '*':
                 return numero1 * numero2
             elif op == '%':
@@ -117,20 +105,11 @@ class TreeVisitor(jsbachVisitor):
         if len(children) == 1:
             print("error")
         else:
-            numero1 = self.visit(children[0])
-            numero2 = self.visit(children[2])
-            if isinstance(numero1, str):
-                numero1 = self.ids[-1][numero1]
-            if isinstance(numero2, str):
-                numero2 = self.ids[-1][numero2]
-            op = children[1].getText()
-            # print(op)
-            # op = op.getText()
+            numero1, numero2, op = self.get_values_from_children(children)
             if op == '+':
                 return numero1 + numero2
             if op == '-':
                 return numero1 - numero2
-        # return numero1 + numero2
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#id.
@@ -254,13 +233,7 @@ class TreeVisitor(jsbachVisitor):
             print("Error")
         # elif len(l) == 3:
         else:
-            numero1 = self.visit(children[0])
-            numero2 = self.visit(children[2])
-            if isinstance(numero1, str):
-                numero1 = self.ids[-1][numero1]
-            if isinstance(numero2, str):
-                numero2 = self.ids[-1][numero2]
-            op = children[1].getText()
+            numero1, numero2, op = self.get_values_from_children(children)
             value = 0
             if op == '=':
                 value = numero1 == numero2
@@ -278,3 +251,13 @@ class TreeVisitor(jsbachVisitor):
                 return 1
             return 0
         # return self.visitChildren(ctx)
+
+    def get_values_from_children(self, children):
+        numero1 = self.visit(children[0])
+        numero2 = self.visit(children[2])
+        if isinstance(numero1, str):
+            numero1 = self.ids[-1][numero1]
+        if isinstance(numero2, str):
+            numero2 = self.ids[-1][numero2]
+        op = children[1].getText()
+        return numero1, numero2, op
