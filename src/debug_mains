@@ -1,8 +1,7 @@
 Main a b c |:
     <!> "Default main Bach"
-    MainSec
 :|
 
-MainSec |:
+MainSec a b c |:
     <!> "This is main 2"
 :|
