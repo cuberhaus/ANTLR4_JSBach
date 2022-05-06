@@ -159,13 +159,13 @@ class TreeVisitor(jsbachVisitor):
         children = list(ctx.getChildren())
         n = len(children)
         current_children = 1
-        while current_children < n:
-            # print(segment)
+        found_newline = False
+        while current_children < n and not found_newline:
             identifier = self.visit(children[current_children])
-            # print(identifier)
-            # identifier = children[current_children]
             segment = children[current_children].getText()
-            if segment.startswith("\"") and segment.endswith("\""):
+            if segment == "\n":
+                found_newline = True
+            elif segment.startswith("\"") and segment.endswith("\""):
                 print(segment[1:-1], end="")
             else:
                 print(self.ids[identifier], end="")
@@ -181,15 +181,15 @@ class TreeVisitor(jsbachVisitor):
     def visitDefinir_procediment(self, ctx: jsbachParser.Definir_procedimentContext):
         children = list(ctx.getChildren())
         n = len(children)
-        nom_procediment = children[0].getText()
+        nom_procediment = children[0].getText()  # El primer fill conté en nom de la funció
         if nom_procediment in self.procediments:
             raise Exception("Funció ja declarada")
         else:
-            variables = self.visit(children[1])
+            variables = self.visit(children[1])  # El segon fill conté els arguments de la funció
             variables_set = set(variables)
             if len(variables) != len(variables_set):
                 raise Exception("El procediment conté variables amb noms repetits!")
-            procediment = children[3]
+            procediment = children[4]  # El 4 fill conté el bloc de codi que conté el procediment de la funció
             self.procediments[nom_procediment] = [variables, procediment]
         # return self.visitChildren(ctx)
 

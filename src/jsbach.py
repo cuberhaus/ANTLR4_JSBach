@@ -16,7 +16,6 @@ visitor.visit(tree)
 
 def main():
     if len(sys.argv) == 2:
-        # visitor.begin("Main")
         visitor.begin_default()
     elif len(sys.argv) == 3:
         visitor.begin(sys.argv[2])

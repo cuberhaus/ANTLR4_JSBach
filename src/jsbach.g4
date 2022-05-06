@@ -11,7 +11,7 @@ statement: if
     | definir_procediment
     | usar_procediment
     | while
-    | expr
+    // | expr
     | assign
     ;
 
@@ -19,26 +19,30 @@ expr: <assoc = right> expr POT expr #pot // Cannot name this expressions as sepa
 	| expr (DIV | MULT | MOD) expr #div_mult_mod
 	| expr (MES | MINUS) expr #mes_minus
 	| NUM #num
-	| ID #id
+	| VARIABLE_ID #id
 ;
 
-lectura: '<?>' ID ;
-escriptura: '<!>' (expr|STRING)+;
-usar_procediment: ID definir_arguments;
-definir_procediment : ID arguments '|:' bloc ':|';
+newlines: NEWLINE+;
+lectura: '<?>' VARIABLE_ID newlines;
+escriptura: '<!>' (expr|STRING)+ newlines;
+usar_procediment: FUNCTION_ID definir_arguments newlines;
+definir_procediment : FUNCTION_ID arguments '|:' newlines bloc ':|' newlines;
 definir_arguments : expr* ;
-arguments: ID*;
-if : 'if' condicio '|:' bloc ':|' (else)? ; // else pot estar o pot no ser-hi
-else : 'else' '|:' bloc ':|';
-while : 'while' condicio '|:' bloc ':|';
+arguments: VARIABLE_ID*;
+if : 'if' condicio '|:' newlines bloc ':|' (newlines | else) ; // else pot estar o pot no ser-hi
+else : 'else' '|:' newlines bloc ':|' newlines;
+while : 'while' condicio '|:' newlines bloc ':|' newlines+;
 condicio: expr ('=' | '/=' | '<' | '>' | '<=' | '>=') expr;
-assign: ID '<-' expr; // x <- 12
+assign: VARIABLE_ID '<-' expr newlines; // x <- 12
 
-ID: [a-zA-Z]+; // match identifiers
+//ID: [a-zA-Z]+; // match identifiers
+FUNCTION_ID: [A-Z] [a-zA-Z]*; // functions start with a capital letter
+VARIABLE_ID: [a-z] [a-zA-Z]*; // variables start with a lower-case letter
 NUM: [0-9]+;
 STRING : '"' .*? '"' ;
-WS: [ \t\n]+ -> skip; // skip spaces, tabs, newlines, \r (windows)
+WS: [ \t]+ -> skip; // skip spaces, tabs, newlines, \r (windows)
 COMMENT : '~~~' .*? '~~~' -> skip ;
+NEWLINE :'\r'? '\n' ; // return newlines to parser (end-statement signal)
 
 DIV: '/';
 MOD: '%';
@@ -46,4 +50,3 @@ MES: '+';
 MINUS: '-';
 MULT: '*';
 POT: '^';
-// NEWLINE :'\r'? '\n' ; // return newlines to parser (end-statement signal)
