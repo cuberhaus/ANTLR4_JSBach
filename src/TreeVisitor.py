@@ -36,19 +36,18 @@ class TreeVisitor(jsbachVisitor):
             identifier = children[0].getText()
             numero = self.visit(children[2])
             # op = children[1].getText()
-
             self.ids[identifier] = numero
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#statement.
     def visitStatement(self, ctx: jsbachParser.StatementContext):
-        children = list(ctx.getChildren())
-        if len(children) == 1:
-            numero1 = self.visit(children[0])
-            print(numero1)
-        else:
-            print("Error")
-
+        # children = list(ctx.getChildren())
+        # if len(children) == 1:
+        #     numero1 = self.visit(children[0])
+        #     print(numero1)
+        # else:
+        #     print("Error")
+        #
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#pot.
@@ -132,11 +131,34 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#lectura.
     def visitLectura(self, ctx:jsbachParser.LecturaContext):
+        children = list(ctx.getChildren())
+
+        if len(children) == 1:
+            print("Error")
+        else:
+            identifier = children[1].getText()
+            numero = int(input())
+            self.ids[identifier] = numero
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#escriptura.
     def visitEscriptura(self, ctx:jsbachParser.EscripturaContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+        n = len(children)
+        current_children = 1
+        while current_children < n:
+            # print(segment)
+            identifier = self.visit(children[current_children])
+            # print(identifier)
+            # identifier = children[current_children]
+            segment = children[current_children].getText()
+            if segment.startswith("\"") and segment.endswith("\""):
+                print(segment[1:-1], end="")
+            else:
+                print(self.ids[identifier], end="")
+            current_children += 1
+        print("\r")
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#usar_procediment.
     def visitUsar_procediment(self, ctx:jsbachParser.Usar_procedimentContext):

@@ -23,7 +23,7 @@ expr: <assoc = right> expr POT expr #pot // Cannot name this expressions as sepa
 ;
 
 lectura: '<?>' ID ;
-escriptura: '<!>' (ID|STRING)+;
+escriptura: '<!>' (expr|STRING)+;
 usar_procediment: ID definir_parametres;
 definir_procediment : ID usar_parametres '|:' bloc ':|';
 usar_parametres : expr* ;
