@@ -166,6 +166,7 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#definir_procediment.
     def visitDefinir_procediment(self, ctx:jsbachParser.Definir_procedimentContext):
+        
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#usar_parametres.

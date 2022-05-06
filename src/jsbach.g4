@@ -24,10 +24,10 @@ expr: <assoc = right> expr POT expr #pot // Cannot name this expressions as sepa
 
 lectura: '<?>' ID ;
 escriptura: '<!>' (expr|STRING)+;
-usar_procediment: ID definir_parametres;
-definir_procediment : ID usar_parametres '|:' bloc ':|';
-usar_parametres : expr* ;
-definir_parametres: ID*;
+usar_procediment: ID definir_arguments;
+definir_procediment : ID arguments '|:' bloc ':|';
+definir_arguments : expr* ;
+arguments: ID*;
 if : 'if' condicio '|:' bloc ':|' (else)? ; // else pot estar o pot no ser-hi
 else : 'else' '|:' bloc ':|';
 while : 'while' condicio '|:' bloc ':|';

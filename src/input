@@ -1,2 +1,3 @@
-a <- 2
-<!> a " " a " " "hi"
+Main |:
+    <!> "Hallo Bach"
+:|
