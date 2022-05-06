@@ -11,7 +11,7 @@ else:
 class TreeVisitor(jsbachVisitor):
     def __init__(self):
         self.nivell = 0
-        self.ids = {}
+        self.ids = [{}]  # Necessitem un llistat de diccionaris per guardar els àmbits de visibilitat
         self.procediments = {}
 
     def begin(self, param):
@@ -50,7 +50,7 @@ class TreeVisitor(jsbachVisitor):
             identifier = children[0].getText()
             numero = self.visit(children[2])
             # op = children[1].getText()
-            self.ids[identifier] = numero
+            self.ids[-1][identifier] = numero
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#statement.
@@ -74,9 +74,9 @@ class TreeVisitor(jsbachVisitor):
             numero1 = self.visit(children[0])
             numero2 = self.visit(children[2])
             if isinstance(numero1, str):
-                numero1 = self.ids[numero1]
+                numero1 = self.ids[-1][numero1]
             if isinstance(numero2, str):
-                numero2 = self.ids[numero2]
+                numero2 = self.ids[-1][numero2]
             # op = children[1].getText()
             return numero1 ** numero2
         return self.visitChildren(ctx)
@@ -91,9 +91,9 @@ class TreeVisitor(jsbachVisitor):
             numero1 = self.visit(children[0])
             numero2 = self.visit(children[2])
             if isinstance(numero1, str):
-                numero1 = self.ids[numero1]
+                numero1 = self.ids[-1][numero1]
             if isinstance(numero2, str):
-                numero2 = self.ids[numero2]
+                numero2 = self.ids[-1][numero2]
             op = children[1].getText()
             if op == '*':
                 return numero1 * numero2
@@ -120,9 +120,9 @@ class TreeVisitor(jsbachVisitor):
             numero1 = self.visit(children[0])
             numero2 = self.visit(children[2])
             if isinstance(numero1, str):
-                numero1 = self.ids[numero1]
+                numero1 = self.ids[-1][numero1]
             if isinstance(numero2, str):
-                numero2 = self.ids[numero2]
+                numero2 = self.ids[-1][numero2]
             op = children[1].getText()
             # print(op)
             # op = op.getText()
@@ -151,7 +151,7 @@ class TreeVisitor(jsbachVisitor):
         else:
             identifier = children[1].getText()
             numero = int(input())
-            self.ids[identifier] = numero
+            self.ids[-1][identifier] = numero
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#escriptura.
@@ -168,7 +168,7 @@ class TreeVisitor(jsbachVisitor):
             elif segment.startswith("\"") and segment.endswith("\""):
                 print(segment[1:-1], end="")
             else:
-                print(self.ids[identifier], end="")
+                print(self.ids[-1][identifier], end="")
             current_children += 1
         print("\r")
         # return self.visitChildren(ctx)
@@ -179,28 +179,37 @@ class TreeVisitor(jsbachVisitor):
         nom_funcio = children[0].getText()
         if nom_funcio not in self.procediments:
             raise Exception("La funció " + nom_funcio + ", no existeix.")
-        else:
-            argument_values = self.visit(children[1]) # definir_arguments
-            if len(argument_values) != len(self.procediments[nom_funcio][0]):
-                raise Exception("El nombre d'arguments en la crida de la funció" + nom_funcio + " no es correspon amb el nombre d'arguments que admet")
-            else:
-                #self.procediments[nom_funcio][0] = argument_values
-        return self.visitChildren(ctx)
+        argument_values = self.visit(children[1])  # definir_arguments
+        argument_ids = self.procediments[nom_funcio][0]
+        if len(argument_values) != len(argument_ids):
+            raise Exception(
+                "El nombre d'arguments en la crida de la funció " + nom_funcio + " no es correspon amb el nombre "
+                                                                                 "d'arguments que admet.")
+        procediment = self.procediments[nom_funcio][1]
+        self.ids.append({})
+        i = 0
+        n = len(argument_ids)
+        while i < n:
+            self.ids[-1][argument_ids[i]] = argument_values[i]
+            i += 1
+        # self.procediments[nom_funcio][0] = argument_values
+        self.visit(procediment)
+        self.ids.pop()
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#definir_procediment.
     def visitDefinir_procediment(self, ctx: jsbachParser.Definir_procedimentContext):
         children = list(ctx.getChildren())
-        n = len(children)
         nom_procediment = children[0].getText()  # El primer fill conté en nom de la funció
         if nom_procediment in self.procediments:
             raise Exception("La funció" + nom_procediment + "ja ha estat declarada.")
-        else:
-            variables = self.visit(children[1])  # El segon fill conté els arguments de la funció
-            variables_set = set(variables)
-            if len(variables) != len(variables_set):
-                raise Exception("El procediment conté variables amb noms repetits!")
-            procediment = children[4]  # El 4 fill conté el bloc de codi que conté el procediment de la funció
-            self.procediments[nom_procediment] = [variables, procediment]
+        arguments = self.visit(children[1])  # El segon fill conté els arguments de la funció
+        variables_set = set(arguments)
+        if len(arguments) != len(variables_set):
+            raise Exception("El procediment conté variables amb noms repetits!")
+        procediment = children[4]  # El 4rt fill conté el bloc de codi que conté el procediment de la funció
+
+        self.procediments[nom_procediment] = [arguments, procediment]
         # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#definir_arguments.

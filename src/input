@@ -1,8 +1,8 @@
-Main a b c |:
-    <!> "Default main Bach"
-    MainSec 2+2 3 4
+Main |:
+    <!> "Main"
+    MainSec 2+4
 :|
 
-MainSec |:
-    <!> "This is main 2"
+MainSec a |:
+    <!> "This function has been called correctly! " a
 :|
