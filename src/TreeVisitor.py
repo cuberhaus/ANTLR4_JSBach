@@ -132,7 +132,7 @@ class TreeVisitor(jsbachVisitor):
             else:
                 print(self.ids[-1][identifier], end="")
             current_children += 1
-        print("\n")
+        print("\n", end="")  # we only need one line feed
 
     # Visit a parse tree produced by jsbachParser#usar_procediment.
     def visitUsar_procediment(self, ctx: jsbachParser.Usar_procedimentContext):
@@ -211,6 +211,9 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#while.
     def visitWhile(self, ctx: jsbachParser.WhileContext):
+        children = list(ctx.getChildren())
+        while self.visit(children[1]):
+            self.visit(children[4])
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#condicio.

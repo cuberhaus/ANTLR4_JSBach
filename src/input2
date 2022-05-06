@@ -25,3 +25,14 @@ Main |:
 MainSec a b |:
     <!> "This function has been called correctly! " a b
 :|
+
+PROVA 4
+
+Main |:
+    x <- 3
+    if 1 > x |:
+        <!> "If is working!"
+    :| else |:
+        <!> "else block!"
+    :|
+:|

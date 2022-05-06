@@ -1,8 +1,7 @@
 Main |:
-    x <- 3
-    if 1 > x |:
-        <!> "If is working!"
-    :| else |:
-        <!> "else block!"
+    n <- 0
+    while n < 5 |:
+        <!> n
+        n <- n + 1
     :|
 :|
