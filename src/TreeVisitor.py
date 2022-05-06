@@ -15,7 +15,17 @@ class TreeVisitor(jsbachVisitor):
         self.procediments = {}
 
     def begin(self, param):
-        pass
+        if param in self.procediments:
+            self.visit(self.procediments[param])
+        else:
+            raise Exception("El codi no conté el procediment " + str(param))
+
+    def begin_default(self):
+        function = "Main"
+        if function in self.procediments:
+            self.visit(self.procediments[function])
+        else:
+            raise Exception("El codi no conté el procediment " + str(function))
 
     # Visit a parse tree produced by ExprParser#root.
     def visitRoot(self, ctx: jsbachParser.RootContext):
@@ -173,22 +183,22 @@ class TreeVisitor(jsbachVisitor):
         n = len(children)
         nom_procediment = children[0].getText()
         if nom_procediment in self.procediments:
-            raise("Funció ja declarada")
+            raise Exception("Funció ja declarada")
         else:
             variables = self.visit(children[1])
             variables_set = set(variables)
             if len(variables) != len(variables_set):
-                raise("El procediment conté variables amb noms repetits!")
+                raise Exception("El procediment conté variables amb noms repetits!")
             procediment = children[3]
             self.procediments[nom_procediment] = [variables, procediment]
         # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#definir_arguments.
-    def visitDefinir_arguments(self, ctx:jsbachParser.Definir_argumentsContext):
+    def visitDefinir_arguments(self, ctx: jsbachParser.Definir_argumentsContext):
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#arguments.
-    def visitArguments(self, ctx:jsbachParser.ArgumentsContext):
+    def visitArguments(self, ctx: jsbachParser.ArgumentsContext):
         children = list(ctx.getChildren())
         arguments = []
         for i in children:
