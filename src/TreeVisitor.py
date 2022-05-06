@@ -16,14 +16,14 @@ class TreeVisitor(jsbachVisitor):
 
     def begin(self, param):
         if param in self.procediments:
-            self.visit(self.procediments[param])
+            self.visit(self.procediments[param][1])
         else:
             raise Exception("El codi no conté el procediment " + str(param))
 
     def begin_default(self):
         function = "Main"
         if function in self.procediments:
-            self.visit(self.procediments[function])
+            self.visit(self.procediments[function][1])
         else:
             raise Exception("El codi no conté el procediment " + str(function))
 
