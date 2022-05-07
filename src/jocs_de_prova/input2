@@ -56,8 +56,11 @@ PROVA 7
 Main |:
     src <- {C D E F G}
 :|
-PROVA 8
+PROVA 8 list operations
 Main |:
+    src <- {1 2 3 4 5}
+    8< src[3]
+    <!> src[3]
 :|
 PROVA 9
 Main |:

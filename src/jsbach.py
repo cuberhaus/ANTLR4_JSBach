@@ -170,11 +170,11 @@ class TreeVisitor(jsbachVisitor):
             if segment == "\n":
                 found_newline = True
             elif segment.startswith("\"") and segment.endswith("\""):
-                print(segment[1:-1], end="")
+                print(segment[1:-1], end=" ")
             elif isinstance(identifier, int):
-                print(identifier, end="")
+                print(identifier, end=" ")
             else:
-                print(self.ids[-1][identifier], end="")
+                print(self.ids[-1][identifier], end=" ")
             current_children += 1
         print("\n", end="")  # we only need one line feed
 
