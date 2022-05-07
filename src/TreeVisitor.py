@@ -21,13 +21,17 @@ def define_notes():
         j = 0
         m = 7
         while j < m:
-            if i != 7:
-                notes[letters[(j + 2) % 7] + str(i)] = j + ((i - 1) * 7) + 2
-            # Les dues últimes notes del bucle les traiem ja que ho hem afegit manualment
-            elif j != 6 and j != 5:
-                notes[letters[(j + 2) % 7] + str(i)] = j + ((i - 1) * 7) + 2
+            notes[letters[(j + 2) % 7] + str(i)] = j + ((i - 1) * 7) + 2
             j += 1
         i += 1
+    notes["C8"] = 51
+    notes['A'] = notes["A4"]
+    notes['B'] = notes["B4"]
+    notes['C'] = notes["C4"]
+    notes['D'] = notes["D4"]
+    notes['E'] = notes["E4"]
+    notes['F'] = notes["F4"]
+    notes['G'] = notes["G4"]
 
 
 class TreeVisitor(jsbachVisitor):
@@ -37,6 +41,7 @@ class TreeVisitor(jsbachVisitor):
         self.ids = [{}]
         self.procediments = {}
         define_notes()
+
         print(notes)
 
     def begin_default(self):
