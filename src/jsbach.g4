@@ -14,7 +14,6 @@ statement:
 	| while
 	// | expr
 	| assign
-	| get_list_size
 	| erase_from_list
 	| append;
 
@@ -23,15 +22,16 @@ expr:
 	| <assoc = right> expr POT expr	# pot // Cannot name this expressions as separate declarations
 	| expr (DIV | MULT | MOD) expr	# div_mult_mod
 	| expr (MES | MINUS) expr		# mes_minus
+	| GET_LIST_SIZE                 # get_list_size
 	| NOTA_ID					    # nota_id
 	| NUM							# num
 	| VARIABLE_ID					# id;
 
 //crea_llista: '{' (expr (',' expr)*)? '}'; // amb comes
 crea_llista: '{' expr* '}'; // sense comes
-append: VARIABLE_ID '<<' expr;
-erase_from_list: '8<' VARIABLE_ID '[' NUM ']';
-get_list_size: VARIABLE_ID '#';
+append: VARIABLE_ID '<<' expr newlines;
+erase_from_list: '8<' VARIABLE_ID '[' NUM ']' newlines;
+GET_LIST_SIZE: '#' VARIABLE_ID ;
 
 newlines: NEWLINE+;
 lectura: '<?>' VARIABLE_ID newlines;

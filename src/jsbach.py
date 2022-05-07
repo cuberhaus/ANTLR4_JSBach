@@ -19,8 +19,8 @@ notes = {}
 def define_notes():
     # global notes # Needed to modify global copy of notes
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-    notes[letters[0] + "0"] = 0
-    notes[letters[1] + "0"] = 1
+    notes["A0"] = 0
+    notes["B0"] = 1
     i = 1
     n = 8
     while i < n:
@@ -319,21 +319,32 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#append.
     def visitAppend(self, ctx: jsbachParser.AppendContext):
+        children = list(ctx.getChildren())
+        function_name = children[0].getText()
+        value = self.visit(children[2])
+        self.ids[-1][function_name].append(value)
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#erase_from_list.
     def visitErase_from_list(self, ctx: jsbachParser.Erase_from_listContext):
+        children = list(ctx.getChildren())
+
         return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#get_list_size.
     def visitGet_list_size(self, ctx: jsbachParser.Get_list_sizeContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+        list_name = children[0].getText()
+        list_name = list_name[1:]
+        size = len(self.ids[-1][list_name])
+        return size
 
     # Visit a parse tree produced by jsbachParser#nota_id.
-    def visitNota_id(self, ctx:jsbachParser.Nota_idContext):
+    def visitNota_id(self, ctx: jsbachParser.Nota_idContext):
         children = list(ctx.getChildren())
         identifier = children[0].getText()
         return identifier
+
 
 def main():
     # input_stream = InputStream(input('? '))
