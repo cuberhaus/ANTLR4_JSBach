@@ -42,8 +42,6 @@ class TreeVisitor(jsbachVisitor):
         self.procediments = {}
         define_notes()
 
-        print(notes)
-
     def begin_default(self):
         """
         Start the program from the "Main" function

@@ -16,18 +16,18 @@ statement:
 	| assign
 	| get_list_size
 	| erase_from_list
-	| append
-	;
+	| append;
 
 expr:
 	'(' expr ')'					# parenthesis
 	| <assoc = right> expr POT expr	# pot // Cannot name this expressions as separate declarations
 	| expr (DIV | MULT | MOD) expr	# div_mult_mod
 	| expr (MES | MINUS) expr		# mes_minus
+	| NOTA_ID					    # nota_id
 	| NUM							# num
 	| VARIABLE_ID					# id;
 
-crea_llista: ( '{' expr (',' expr)* '}' )?;
+crea_llista: ( '{' expr (',' expr)* '}')?;
 append: VARIABLE_ID '<<' expr;
 erase_from_list: '8<' VARIABLE_ID '[' NUM ']';
 get_list_size: VARIABLE_ID '#';
@@ -45,8 +45,10 @@ if:
 else: 'else' '|:' newlines bloc ':|' newlines;
 while: 'while' condicio '|:' newlines bloc ':|' newlines+;
 condicio: expr ('=' | '/=' | '<' | '>' | '<=' | '>=') expr;
-assign: VARIABLE_ID '<-' (expr | condicio | crea_llista) newlines;
+assign:
+	VARIABLE_ID '<-' (expr | condicio | crea_llista) newlines;
 
+NOTA_ID: ('A0' | 'B0' | [A-G][0-7] | 'C8');
 FUNCTION_ID:
 	[A-Z] [a-zA-Z]*; // functions start with a capital letter
 VARIABLE_ID:
