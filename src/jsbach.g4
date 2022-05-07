@@ -31,6 +31,7 @@ crea_llista: ( '{' expr (',' expr)* '}' )?;
 append: VARIABLE_ID '<<' expr;
 erase_from_list: '8<' VARIABLE_ID '[' NUM ']';
 get_list_size: VARIABLE_ID '#';
+
 newlines: NEWLINE+;
 lectura: '<?>' VARIABLE_ID newlines;
 escriptura: '<!>' (expr | STRING)+ newlines;

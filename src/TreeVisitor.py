@@ -7,6 +7,28 @@ else:
     from jsbachParser import jsbachParser
     from jsbachVisitor import jsbachVisitor
 
+notes = {}
+
+
+def define_notes():
+    # global notes # Needed to modify global copy of notes
+    letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    notes[letters[0] + "0"] = 0
+    notes[letters[1] + "0"] = 1
+    i = 1
+    n = 8
+    while i < n:
+        j = 0
+        m = 7
+        while j < m:
+            if i != 7:
+                notes[letters[(j + 2) % 7] + str(i)] = j + ((i - 1) * 7) + 2
+            # Les dues últimes notes del bucle les traiem ja que ho hem afegit manualment
+            elif j != 6 and j != 5:
+                notes[letters[(j + 2) % 7] + str(i)] = j + ((i - 1) * 7) + 2
+            j += 1
+        i += 1
+
 
 class TreeVisitor(jsbachVisitor):
     def __init__(self):
@@ -14,6 +36,8 @@ class TreeVisitor(jsbachVisitor):
         # Necessitem un llistat de diccionaris per guardar els àmbits de visibilitat
         self.ids = [{}]
         self.procediments = {}
+        define_notes()
+        print(notes)
 
     def begin_default(self):
         """
@@ -85,6 +109,8 @@ class TreeVisitor(jsbachVisitor):
             elif op == '%':
                 return numero1 % numero2
             elif op == '/':
+                if numero2 == 0:
+                    raise Exception("Divisió per zero!")
                 return numero1 / numero2
         return self.visitChildren(ctx)
 
@@ -182,7 +208,7 @@ class TreeVisitor(jsbachVisitor):
         variables_set = set(arguments)
         if len(arguments) != len(variables_set):
             raise Exception(
-                "El procediment conté variables amb noms repetits!")
+                "El procediment conté noms de paràmetres formals repetits!")
         # El 4rt fill conté el bloc de codi que conté el procediment de la funció
         procediment = children[4]
         self.procediments[nom_procediment] = [arguments, procediment]
