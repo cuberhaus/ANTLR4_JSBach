@@ -171,6 +171,8 @@ class TreeVisitor(jsbachVisitor):
                 found_newline = True
             elif segment.startswith("\"") and segment.endswith("\""):
                 print(segment[1:-1], end="")
+            elif isinstance(identifier, int):
+                print(identifier, end="")
             else:
                 print(self.ids[-1][identifier], end="")
             current_children += 1
@@ -344,6 +346,14 @@ class TreeVisitor(jsbachVisitor):
         list_name = list_name[1:]
         size = len(self.ids[-1][list_name])
         return size
+
+    # Visit a parse tree produced by jsbachParser#access_list.
+    def visitAccess_list(self, ctx:jsbachParser.Access_listContext):
+        children = list(ctx.getChildren())
+        list_name = children[0].getText()
+        index = self.visit(children[2])
+        value = self.ids[-1][list_name][index]
+        return value
 
     # Visit a parse tree produced by jsbachParser#nota_id.
     def visitNota_id(self, ctx: jsbachParser.Nota_idContext):
