@@ -13,7 +13,11 @@ statement:
 	| usar_procediment
 	| while
 	// | expr
-	| assign;
+	| assign
+	| get_list_size
+	| erase_from_list
+	| append
+	;
 
 expr:
 	'(' expr ')'					# parenthesis
@@ -23,6 +27,10 @@ expr:
 	| NUM							# num
 	| VARIABLE_ID					# id;
 
+crea_llista: ( '{' expr (',' expr)* '}' )?;
+append: VARIABLE_ID '<<' expr;
+erase_from_list: '8<' VARIABLE_ID '[' NUM ']';
+get_list_size: VARIABLE_ID '#';
 newlines: NEWLINE+;
 lectura: '<?>' VARIABLE_ID newlines;
 escriptura: '<!>' (expr | STRING)+ newlines;
@@ -36,7 +44,7 @@ if:
 else: 'else' '|:' newlines bloc ':|' newlines;
 while: 'while' condicio '|:' newlines bloc ':|' newlines+;
 condicio: expr ('=' | '/=' | '<' | '>' | '<=' | '>=') expr;
-assign: VARIABLE_ID '<-' (expr | condicio) newlines;
+assign: VARIABLE_ID '<-' (expr | condicio | crea_llista) newlines;
 
 FUNCTION_ID:
 	[A-Z] [a-zA-Z]*; // functions start with a capital letter
