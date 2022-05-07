@@ -308,7 +308,14 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#crea_llista.
     def visitCrea_llista(self, ctx: jsbachParser.Crea_llistaContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+        i = 1
+        n = len(children) - 1
+        valors = []
+        while i < n:
+            valors.append(self.visit(children[i]))
+            i += 1
+        return valors
 
     # Visit a parse tree produced by jsbachParser#append.
     def visitAppend(self, ctx: jsbachParser.AppendContext):
@@ -322,6 +329,11 @@ class TreeVisitor(jsbachVisitor):
     def visitGet_list_size(self, ctx: jsbachParser.Get_list_sizeContext):
         return self.visitChildren(ctx)
 
+    # Visit a parse tree produced by jsbachParser#nota_id.
+    def visitNota_id(self, ctx:jsbachParser.Nota_idContext):
+        children = list(ctx.getChildren())
+        identifier = children[0].getText()
+        return identifier
 
 def main():
     # input_stream = InputStream(input('? '))

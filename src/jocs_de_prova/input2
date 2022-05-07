@@ -52,3 +52,19 @@ Main |:
         n <- n + 1
     :|
 :|
+PROVA 7
+Main |:
+    src <- {C D E F G}
+:|
+PROVA 8
+Main |:
+:|
+PROVA 9
+Main |:
+:|
+PROVA 10
+Main |:
+:|
+PROVA 11
+Main |:
+:|
