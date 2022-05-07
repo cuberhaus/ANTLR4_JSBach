@@ -27,7 +27,8 @@ expr:
 	| NUM							# num
 	| VARIABLE_ID					# id;
 
-crea_llista: ( '{' expr (',' expr)* '}')?;
+//crea_llista: '{' (expr (',' expr)*)? '}'; // amb comes
+crea_llista: '{' expr* '}'; // sense comes
 append: VARIABLE_ID '<<' expr;
 erase_from_list: '8<' VARIABLE_ID '[' NUM ']';
 get_list_size: VARIABLE_ID '#';
@@ -48,7 +49,7 @@ condicio: expr ('=' | '/=' | '<' | '>' | '<=' | '>=') expr;
 assign:
 	VARIABLE_ID '<-' (expr | condicio | crea_llista) newlines;
 
-NOTA_ID: ('A0' | 'B0' | [A-G][0-7] | 'C8');
+NOTA_ID: ('A0' | 'B0' | [A-G][0-7] | 'C8' | [A-G]);
 FUNCTION_ID:
 	[A-Z] [a-zA-Z]*; // functions start with a capital letter
 VARIABLE_ID:

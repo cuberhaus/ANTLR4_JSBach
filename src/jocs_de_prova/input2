@@ -39,7 +39,9 @@ Main |:
 
 PROVA 5 check if parenthesis work
 Main |:
-    x <- 2 / 3 + 2
+    x <- 2 / 2 + 2
+    y <- 2 / ( 2 + 2 )
+    <!> x " : " y
 :|
 
 PROVA 6
