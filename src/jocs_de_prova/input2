@@ -38,3 +38,15 @@ Main |:
 :|
 
 PROVA 5 check if parenthesis work
+Main |:
+    x <- 2 / 3 + 2
+:|
+
+PROVA 6
+Main |:
+    n <- 0
+    while n < 5 |:
+        <!> n
+        n <- n + 1
+    :|
+:|

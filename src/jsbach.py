@@ -302,7 +302,9 @@ class TreeVisitor(jsbachVisitor):
 
     # Visit a parse tree produced by jsbachParser#parenthesis.
     def visitParenthesis(self, ctx: jsbachParser.ParenthesisContext):
-        return self.visitChildren(ctx)
+        children = list(ctx.getChildren())
+        return self.visit(children[1])
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#crea_llista.
     def visitCrea_llista(self, ctx: jsbachParser.Crea_llistaContext):
