@@ -1,10 +1,7 @@
 import sys
 
 from antlr4 import *
-
 from jsbachLexer import jsbachLexer
-
-# from TreeVisitor import TreeVisitor
 
 if __name__ is not None and "." in __name__:
     from jsbachParser import jsbachParser
@@ -206,7 +203,7 @@ class TreeVisitor(jsbachVisitor):
         self.ids.pop()
 
     # Visit a parse tree produced by jsbachParser#definir_procediment.
-    def visitDefinir_procediment(self, ctx: jsbachParser.Definir_procedimentContext):
+    def visitDeclarar_procediment(self, ctx: jsbachParser.Declarar_procedimentContext):
         children = list(ctx.getChildren())
         # El primer fill conté el nom de la funció
         nom_procediment = children[0].getText()
@@ -233,7 +230,7 @@ class TreeVisitor(jsbachVisitor):
         return argument_values
 
     # Visit a parse tree produced by jsbachParser#arguments.
-    def visitArguments(self, ctx: jsbachParser.ArgumentsContext):
+    def visitDeclarar_arguments(self, ctx: jsbachParser.Declarar_argumentsContext):
         children = list(ctx.getChildren())
         arguments = []
         for i in children:
@@ -320,21 +317,30 @@ class TreeVisitor(jsbachVisitor):
     # Visit a parse tree produced by jsbachParser#append.
     def visitAppend(self, ctx: jsbachParser.AppendContext):
         children = list(ctx.getChildren())
-        function_name = children[0].getText()
+        list_name = children[0].getText()
+        if list_name not in self.ids[-1]:
+            raise Exception("This list does not exist!")
         value = self.visit(children[2])
-        self.ids[-1][function_name].append(value)
-        return self.visitChildren(ctx)
+        self.ids[-1][list_name].append(value)
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#erase_from_list.
     def visitErase_from_list(self, ctx: jsbachParser.Erase_from_listContext):
         children = list(ctx.getChildren())
-
-        return self.visitChildren(ctx)
+        list_name = children[1].getText()
+        if list_name not in self.ids[-1]:
+            raise Exception("This list does not exist!")
+        index = int(children[3].getText()) - 1
+        if index < 1 or index > len(self.ids[-1][list_name]):
+            raise Exception("L'element està fora del rang entre 1 i n")
+        self.ids[-1][list_name].pop(index)
 
     # Visit a parse tree produced by jsbachParser#get_list_size.
     def visitGet_list_size(self, ctx: jsbachParser.Get_list_sizeContext):
         children = list(ctx.getChildren())
         list_name = children[0].getText()
+        if list_name not in self.ids[-1]:
+            raise Exception("This list does not exist!")
         list_name = list_name[1:]
         size = len(self.ids[-1][list_name])
         return size
