@@ -15,18 +15,27 @@ class TreeVisitor(jsbachVisitor):
         self.ids = [{}]
         self.procediments = {}
 
-    def begin(self, param):
-        if param in self.procediments:
-            self.visit(self.procediments[param][1])
-        else:
-            raise Exception("El codi no conté el procediment " + str(param))
-
     def begin_default(self):
+        """
+        Start the program from the "Main" function
+        :return: None
+        """
         function = "Main"
         if function in self.procediments:
             self.visit(self.procediments[function][1])
         else:
             raise Exception("El codi no conté el procediment " + str(function))
+
+    def begin(self, param):
+        """
+        Start the program from the "param" function
+        :param param:
+        :return:
+        """
+        if param in self.procediments:
+            self.visit(self.procediments[param][1])
+        else:
+            raise Exception("El codi no conté el procediment " + str(param))
 
     # Visit a parse tree produced by ExprParser#root.
     def visitRoot(self, ctx: jsbachParser.RootContext):
@@ -241,6 +250,11 @@ class TreeVisitor(jsbachVisitor):
             return 0
 
     def get_values_from_children(self, children):
+        """
+        Returns the numbers from operations with two parameters and the operator from the children.
+        :param children: children nodes of the current node
+        :return: First number, second number, operator
+        """
         numero1 = self.visit(children[0])
         numero2 = self.visit(children[2])
         if isinstance(numero1, str):
@@ -249,3 +263,23 @@ class TreeVisitor(jsbachVisitor):
             numero2 = self.ids[-1][numero2]
         op = children[1].getText()
         return numero1, numero2, op
+
+    # Visit a parse tree produced by jsbachParser#parenthesis.
+    def visitParenthesis(self, ctx: jsbachParser.ParenthesisContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#crea_llista.
+    def visitCrea_llista(self, ctx: jsbachParser.Crea_llistaContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#append.
+    def visitAppend(self, ctx: jsbachParser.AppendContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#erase_from_list.
+    def visitErase_from_list(self, ctx: jsbachParser.Erase_from_listContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by jsbachParser#get_list_size.
+    def visitGet_list_size(self, ctx: jsbachParser.Get_list_sizeContext):
+        return self.visitChildren(ctx)
