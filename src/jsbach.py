@@ -11,48 +11,56 @@ else:
     from jsbachParser import jsbachParser
     from jsbachVisitor import jsbachVisitor
 
-notes = {}
+note_to_int = {}
 
-int_to_note_timidity = {}
+int_to_note = {}
 
 
-def int_to_note():
+def initialize_int_to_note():
+    """
+    Initializes a dictionary which transforms a value into its corresponding string in lilypond
+    :return:
+    """
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-    int_to_note_timidity[0] = "a'0"
-    int_to_note_timidity[1] = "b'0"
+    int_to_note[0] = "a'0"
+    int_to_note[1] = "b'0"
     i = 1
     n = 8
     while i < n:
         j = 0
         m = 7
         while j < m:
-            int_to_note_timidity[j + ((i - 1) * 7) + 2] = letters[(j + 2) % 7] + "'" + str(i)
+            int_to_note[j + ((i - 1) * 7) + 2] = letters[(j + 2) % 7] + "'" + str(i)
             j += 1
         i += 1
 
 
-def define_notes():
+def initialize_note_to_int():
+    """
+    Initializes a dictionary which transforms notes from the programming language into its corresponding int
+    :return: None
+    """
     # global notes # Needed to modify global copy of notes
     letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-    notes["A0"] = 0
-    notes["B0"] = 1
+    note_to_int["A0"] = 0
+    note_to_int["B0"] = 1
     i = 1
     n = 8
     while i < n:
         j = 0
         m = 7
         while j < m:
-            notes[letters[(j + 2) % 7] + str(i)] = j + ((i - 1) * 7) + 2
+            note_to_int[letters[(j + 2) % 7] + str(i)] = j + ((i - 1) * 7) + 2
             j += 1
         i += 1
-    notes["C8"] = 51
-    notes['A'] = notes["A4"]
-    notes['B'] = notes["B4"]
-    notes['C'] = notes["C4"]
-    notes['D'] = notes["D4"]
-    notes['E'] = notes["E4"]
-    notes['F'] = notes["F4"]
-    notes['G'] = notes["G4"]
+    note_to_int["C8"] = 51
+    note_to_int['A'] = note_to_int["A4"]
+    note_to_int['B'] = note_to_int["B4"]
+    note_to_int['C'] = note_to_int["C4"]
+    note_to_int['D'] = note_to_int["D4"]
+    note_to_int['E'] = note_to_int["E4"]
+    note_to_int['F'] = note_to_int["F4"]
+    note_to_int['G'] = note_to_int["G4"]
 
 
 # Class has to be defined above main, like in c++
@@ -63,8 +71,8 @@ class TreeVisitor(jsbachVisitor):
         self.ids = [{}]
         self.procediments = {}
         self.notes_a_reproduir = []
-        define_notes()
-        int_to_note()
+        initialize_note_to_int()
+        initialize_int_to_note()
 
     def begin_default(self):
         """
@@ -379,7 +387,7 @@ class TreeVisitor(jsbachVisitor):
     def visitNota_id(self, ctx: jsbachParser.Nota_idContext):
         children = list(ctx.getChildren())
         identifier = children[0].getText()
-        return notes[identifier]
+        return note_to_int[identifier]
         # return identifier
 
     # Visit a parse tree produced by jsbachParser#reproduccio.
@@ -390,7 +398,7 @@ class TreeVisitor(jsbachVisitor):
             if value_nota not in self.ids[-1]:
                 raise Exception("La variable no existeix!")
             value_nota = self.ids[-1][value_nota]
-        if value_nota < 0 or value_nota > len(notes):
+        if value_nota < 0 or value_nota > len(note_to_int):
             raise Exception("El valor a reproduir no és una nota!")
 
         self.notes_a_reproduir.append(value_nota)
@@ -421,7 +429,7 @@ def main():
         \\tempo 4 = 120\n"""
     note_strings = []
     for nota in visitor.notes_a_reproduir:
-        note_strings.append(int_to_note_timidity[nota])
+        note_strings.append(int_to_note[nota])
     string_notes = ' '.join(note_strings)
     string_notes = "        " + string_notes
     # string_notes =""
