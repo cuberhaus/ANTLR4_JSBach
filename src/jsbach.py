@@ -1,4 +1,5 @@
 import sys
+import os
 
 from antlr4 import *
 from jsbachLexer import jsbachLexer
@@ -349,7 +350,7 @@ class TreeVisitor(jsbachVisitor):
         return size
 
     # Visit a parse tree produced by jsbachParser#access_list.
-    def visitAccess_list(self, ctx:jsbachParser.Access_listContext):
+    def visitAccess_list(self, ctx: jsbachParser.Access_listContext):
         children = list(ctx.getChildren())
         list_name = children[0].getText()
         index = self.visit(children[2])
@@ -364,7 +365,7 @@ class TreeVisitor(jsbachVisitor):
         # return identifier
 
     # Visit a parse tree produced by jsbachParser#reproduccio.
-    def visitReproduccio(self, ctx:jsbachParser.ReproduccioContext):
+    def visitReproduccio(self, ctx: jsbachParser.ReproduccioContext):
         children = list(ctx.getChildren())
         value_nota = self.visit(children[1])
         if isinstance(value_nota, str):
@@ -392,6 +393,26 @@ def main():
         visitor.begin_default()
     elif len(sys.argv) == 3:
         visitor.begin(sys.argv[2])
+    else:
+        raise Exception("Incorrect number of arguments")
+    input_file_name = os.path.basename(sys.argv[1])
+    # print(input_file_name)
+    lilyfile = """\"\\version \\"2.22.1\\"
+\\score { 
+    \\absolute { 
+        \\tempo 4 = 120 
+        c'4 d'4 e'4 f'4 g'4 a'4 b'4 
+    } 
+    \\layout {} 
+    \\midi {} 
+} \" """
+    os.system("echo " + lilyfile + " > " + input_file_name + ".lily")
+
+    os.system("lilypond " + input_file_name + ".lily")
+    os.system("timidity -Ow -o " + input_file_name + ".wav " + input_file_name + ".midi")
+    os.system("ffmpeg -i " + input_file_name + ".wav -codec:a libmp3lame -qscale:a 2 " + input_file_name + ".mp3")
+
+    os.system("mplayer " + input_file_name + ".mp3")
 
 
 if __name__ == '__main__':
