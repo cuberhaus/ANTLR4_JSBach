@@ -44,6 +44,7 @@ class TreeVisitor(jsbachVisitor):
         # Necessitem un llistat de diccionaris per guardar els àmbits de visibilitat
         self.ids = [{}]
         self.procediments = {}
+        self.notes_a_reproduir = []
         define_notes()
 
     def begin_default(self):
@@ -359,7 +360,22 @@ class TreeVisitor(jsbachVisitor):
     def visitNota_id(self, ctx: jsbachParser.Nota_idContext):
         children = list(ctx.getChildren())
         identifier = children[0].getText()
-        return identifier
+        return notes[identifier]
+        # return identifier
+
+    # Visit a parse tree produced by jsbachParser#reproduccio.
+    def visitReproduccio(self, ctx:jsbachParser.ReproduccioContext):
+        children = list(ctx.getChildren())
+        value_nota = self.visit(children[1])
+        if isinstance(value_nota, str):
+            if value_nota not in self.ids[-1]:
+                raise Exception("La variable no existeix!")
+            value_nota = self.ids[-1][value_nota]
+        if value_nota < 0 or value_nota > len(notes):
+            raise Exception("El valor a reproduir no és una nota!")
+
+        self.notes_a_reproduir.append(value_nota)
+        # return self.visitChildren(ctx)
 
 
 def main():
