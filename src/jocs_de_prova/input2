@@ -77,9 +77,13 @@ Hanoi n ori dst aux |:
     :|
 :|
 
-PROVA 10
-Main |:
-:|
-PROVA 11
+PROVA 10 totes les notes
+Alle_Schlüssel |:
+    note <- A0
+    while note <= C8 |:
+        <:> note
+        note <- note + 1
+    :|
+:|PROVA 11
 Main |:
 :|

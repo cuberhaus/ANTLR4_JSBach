@@ -13,6 +13,23 @@ else:
 
 notes = {}
 
+int_to_note_timidity = {}
+
+
+def int_to_note():
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    int_to_note_timidity[0] = "a'0"
+    int_to_note_timidity[1] = "b'0"
+    i = 1
+    n = 8
+    while i < n:
+        j = 0
+        m = 7
+        while j < m:
+            int_to_note_timidity[j + ((i - 1) * 7) + 2] = letters[(j + 2) % 7] + "'" + str(i)
+            j += 1
+        i += 1
+
 
 def define_notes():
     # global notes # Needed to modify global copy of notes
@@ -47,6 +64,7 @@ class TreeVisitor(jsbachVisitor):
         self.procediments = {}
         self.notes_a_reproduir = []
         define_notes()
+        int_to_note()
 
     def begin_default(self):
         """
@@ -397,19 +415,25 @@ def main():
         raise Exception("Incorrect number of arguments")
     input_file_name = os.path.basename(sys.argv[1])
     # print(input_file_name)
-    lilyfile = """\"\\version \\"2.22.1\\"
+    lilyfile1 = """\"\\version \\"2.22.1\\"
 \\score { 
     \\absolute { 
-        \\tempo 4 = 120 
-        c'4 d'4 e'4 f'4 g'4 a'4 b'4 
+        \\tempo 4 = 120\n"""
+    note_strings = []
+    for nota in visitor.notes_a_reproduir:
+        note_strings.append(int_to_note_timidity[nota])
+    string_notes = ' '.join(note_strings)
+    string_notes = "        " + string_notes
+    # string_notes =""
+    lilyfile2 = """
     } 
     \\layout {} 
     \\midi {} 
 } \" """
-    os.system("echo " + lilyfile + " > " + input_file_name + ".lily")
+    os.system("echo " + lilyfile1 + string_notes + lilyfile2 + " > " + input_file_name + ".lily")
 
-    os.system("lilypond " + input_file_name + ".lily")
-    os.system("timidity -Ow -o " + input_file_name + ".wav " + input_file_name + ".midi")
+    os.system("lilypond " + input_file_name + ".lily")  # THIS WORKS
+    os.system("timidity -Ow -o " + input_file_name + ".wav " + input_file_name + ".midi")  # THIS DOESNT
     os.system("ffmpeg -i " + input_file_name + ".wav -codec:a libmp3lame -qscale:a 2 " + input_file_name + ".mp3")
 
     os.system("mplayer " + input_file_name + ".mp3")
