@@ -19,7 +19,7 @@ int_to_note = {}
 def initialize_int_to_note():
     """
     Initializes a dictionary which transforms a value into its corresponding string in lilypond
-    :return:
+    :return: None
     """
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
     int_to_note[0] = "a'0"
@@ -331,7 +331,6 @@ class TreeVisitor(jsbachVisitor):
     def visitParenthesis(self, ctx: jsbachParser.ParenthesisContext):
         children = list(ctx.getChildren())
         return self.visit(children[1])
-        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#crea_llista.
     def visitCrea_llista(self, ctx: jsbachParser.Crea_llistaContext):
@@ -352,7 +351,6 @@ class TreeVisitor(jsbachVisitor):
             raise Exception("This list does not exist!")
         value = self.visit(children[2])
         self.ids[-1][list_name].append(value)
-        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#erase_from_list.
     def visitErase_from_list(self, ctx: jsbachParser.Erase_from_listContext):
@@ -388,7 +386,6 @@ class TreeVisitor(jsbachVisitor):
         children = list(ctx.getChildren())
         identifier = children[0].getText()
         return note_to_int[identifier]
-        # return identifier
 
     # Visit a parse tree produced by jsbachParser#reproduccio.
     def visitReproduccio(self, ctx: jsbachParser.ReproduccioContext):
@@ -402,11 +399,9 @@ class TreeVisitor(jsbachVisitor):
             raise Exception("El valor a reproduir no és una nota!")
 
         self.notes_a_reproduir.append(value_nota)
-        # return self.visitChildren(ctx)
 
 
 def main():
-    # input_stream = InputStream(input('? '))
     input_stream = FileStream(sys.argv[1])
     lexer = jsbachLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
@@ -422,7 +417,6 @@ def main():
     else:
         raise Exception("Incorrect number of arguments")
     input_file_name = os.path.basename(sys.argv[1])
-    # print(input_file_name)
     lilyfile1 = """\"\\version \\"2.22.1\\"
 \\score { 
     \\absolute { 
@@ -432,7 +426,6 @@ def main():
         note_strings.append(int_to_note[nota])
     string_notes = ' '.join(note_strings)
     string_notes = "        " + string_notes
-    # string_notes =""
     lilyfile2 = """
     } 
     \\layout {} 
