@@ -45,7 +45,7 @@ lectura: '<?>' VARIABLE_ID newlines;
 escriptura: '<!>' (expr | STRING)+ newlines;
 usar_procediment: FUNCTION_ID definir_arguments newlines;
 declarar_procediment:
-	FUNCTION_ID declarar_arguments '|:' newlines bloc ':|' newlines;
+	FUNCTION_ID declarar_arguments '|:' newlines bloc ':|' ; // no cal newlines si hi ha newlines ja ho parsejarà el statement
 definir_arguments: expr*;
 declarar_arguments: VARIABLE_ID*;
 if:
