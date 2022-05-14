@@ -56,9 +56,10 @@ assign:
 
 NOTA_ID: ('A0' | 'B0' | [A-G][0-7] | 'C8' | [A-G]);
 FUNCTION_ID:
-	[A-Z] [a-zA-Z]*; // functions start with a capital letter
+	[A-Z] ('A'..'Z'| 'a'..'z' | '_' | '0'..'9')*; // functions start with a capital letter
+//	[A-Z] [a-zA-Z]*; // functions start with a capital letter
 VARIABLE_ID:
-	[a-z] [a-zA-Z]*; // variables start with a lower-case letter
+	[a-z] ('A'..'Z'| 'a'..'z' | '_' | '0'..'9')*; // variables start with a lower-case letter
 NUM: [0-9]+;
 STRING: '"' .*? '"';
 WS: [ \t]+ -> skip; // skip spaces, tabs, newlines, \r (windows)

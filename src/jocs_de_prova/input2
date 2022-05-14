@@ -1,4 +1,4 @@
-PROVA 1
+PROVA 1 (Aquesta només funciona quan no hi ha procediments)
 x <- 6
 x + 2
 y <- 12
