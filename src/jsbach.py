@@ -450,7 +450,7 @@ def main():
         os.system("echo " + lilyfile1 + string_notes + lilyfile2 + " > " + input_file_name + ".lily")
         os.system("lilypond " + input_file_name + ".lily")  # THIS WORKS
         os.system("timidity -Ow -o " + input_file_name + ".wav " + input_file_name + ".midi")  # THIS DOESNT
-        os.system("ffmpeg -i " + input_file_name + ".wav -codec:a libmp3lame -qscale:a 2 " + input_file_name + ".mp3")
+        os.system("ffmpeg -y -i " + input_file_name + ".wav -codec:a libmp3lame -qscale:a 2 " + input_file_name + ".mp3")
         os.system("mplayer " + input_file_name + ".mp3")
 
 
