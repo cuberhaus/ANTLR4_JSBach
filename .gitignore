@@ -33,3 +33,5 @@ jsbachLexer.py
 *.mp3
 *.pdf
 *.wav
+
+src/jocs_de_prova/input

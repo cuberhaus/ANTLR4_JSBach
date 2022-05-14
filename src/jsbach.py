@@ -419,28 +419,28 @@ def main():
         visitor.begin(sys.argv[2])
     else:
         raise Exception("Incorrect number of arguments")
-    input_file_name = os.path.basename(sys.argv[1])
-    lilyfile1 = """\"\\version \\"2.22.1\\"
-\\score { 
-    \\absolute { 
-        \\tempo 4 = 120\n"""
-    note_strings = []
-    for nota in visitor.notes_a_reproduir:
-        note_strings.append(int_to_note[nota])
-    string_notes = ' '.join(note_strings)
-    string_notes = "        " + string_notes
-    lilyfile2 = """
-    } 
-    \\layout {} 
-    \\midi {} 
-} \" """
-    os.system("echo " + lilyfile1 + string_notes + lilyfile2 + " > " + input_file_name + ".lily")
 
-    os.system("lilypond " + input_file_name + ".lily")  # THIS WORKS
-    os.system("timidity -Ow -o " + input_file_name + ".wav " + input_file_name + ".midi")  # THIS DOESNT
-    os.system("ffmpeg -i " + input_file_name + ".wav -codec:a libmp3lame -qscale:a 2 " + input_file_name + ".mp3")
-
-    os.system("mplayer " + input_file_name + ".mp3")
+    if len(visitor.notes_a_reproduir) > 0:
+        input_file_name = os.path.basename(sys.argv[1])
+        lilyfile1 = """\"\\version \\"2.22.1\\"
+    \\score { 
+        \\absolute { 
+            \\tempo 4 = 120\n"""
+        note_strings = []
+        for nota in visitor.notes_a_reproduir:
+            note_strings.append(int_to_note[nota])
+        string_notes = ' '.join(note_strings)
+        string_notes = "        " + string_notes
+        lilyfile2 = """
+        } 
+        \\layout {} 
+        \\midi {} 
+    } \" """
+        os.system("echo " + lilyfile1 + string_notes + lilyfile2 + " > " + input_file_name + ".lily")
+        os.system("lilypond " + input_file_name + ".lily")  # THIS WORKS
+        os.system("timidity -Ow -o " + input_file_name + ".wav " + input_file_name + ".midi")  # THIS DOESNT
+        os.system("ffmpeg -i " + input_file_name + ".wav -codec:a libmp3lame -qscale:a 2 " + input_file_name + ".mp3")
+        os.system("mplayer " + input_file_name + ".mp3")
 
 
 if __name__ == '__main__':
