@@ -84,7 +84,8 @@ Alle_Schlüssel |:
         <:> note
         note <- note + 1
     :|
-:|PROVA 11 HANOI RECURSIVE
+:|
+PROVA 11 HANOI RECURSIVE
 
 Main |:
     src <- {C D E F G}

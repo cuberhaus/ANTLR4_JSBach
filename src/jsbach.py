@@ -134,7 +134,7 @@ class TreeVisitor(jsbachVisitor):
             identifier = children[0].getText()
             numero = self.visit(children[2])
             self.ids[-1][identifier] = numero
-        return self.visitChildren(ctx)
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#statement.
     def visitStatement(self, ctx: jsbachParser.StatementContext):
@@ -148,7 +148,7 @@ class TreeVisitor(jsbachVisitor):
         else:
             numero1, numero2, op = self.get_values_from_children(children)
             return numero1 ** numero2
-        return self.visitChildren(ctx)
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#div_mult_mod.
     def visitDiv_mult_mod(self, ctx: jsbachParser.Div_mult_modContext):
@@ -165,7 +165,7 @@ class TreeVisitor(jsbachVisitor):
                 if numero2 == 0:
                     raise Exception("Divisió per zero!")
                 return numero1 / numero2
-        return self.visitChildren(ctx)
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#num.
     def visitNum(self, ctx: jsbachParser.NumContext):
@@ -184,7 +184,7 @@ class TreeVisitor(jsbachVisitor):
                 return numero1 + numero2
             if op == '-':
                 return numero1 - numero2
-        return self.visitChildren(ctx)
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by ExprParser#id.
     def visitId(self, ctx: jsbachParser.IdContext):
@@ -201,7 +201,7 @@ class TreeVisitor(jsbachVisitor):
             identifier = children[1].getText()
             numero = int(input())
             self.ids[-1][identifier] = numero
-        return self.visitChildren(ctx)
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#escriptura.
     def visitEscriptura(self, ctx: jsbachParser.EscripturaContext):
@@ -303,7 +303,7 @@ class TreeVisitor(jsbachVisitor):
         children = list(ctx.getChildren())
         while self.visit(children[1]):
             self.visit(children[4])
-        return self.visitChildren(ctx)
+        # return self.visitChildren(ctx)
 
     # Visit a parse tree produced by jsbachParser#condicio.
     def visitCondicio(self, ctx: jsbachParser.CondicioContext):
