@@ -362,9 +362,9 @@ class TreeVisitor(jsbachVisitor):
         if list_name not in self.ids[-1]:
             raise Exception("The list with name " + list_name + " does not exist, erase from list failed")
         index = self.visit(children[3])
-        index = int(index) - 1
         if index < 1 or index > len(self.ids[-1][list_name]):
             raise Exception("L'element està fora del rang entre 1 i n")
+        index = int(index) - 1
         self.ids[-1][list_name].pop(index)
 
     # Visit a parse tree produced by jsbachParser#get_list_size.
