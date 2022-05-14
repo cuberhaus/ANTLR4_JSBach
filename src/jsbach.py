@@ -351,7 +351,7 @@ class TreeVisitor(jsbachVisitor):
         children = list(ctx.getChildren())
         list_name = children[0].getText()
         if list_name not in self.ids[-1]:
-            raise Exception("This list does not exist!")
+            raise Exception("This list does not exist, append failed")
         value = self.visit(children[2])
         self.ids[-1][list_name].append(value)
 
@@ -360,7 +360,7 @@ class TreeVisitor(jsbachVisitor):
         children = list(ctx.getChildren())
         list_name = children[1].getText()
         if list_name not in self.ids[-1]:
-            raise Exception("This list does not exist!")
+            raise Exception("This list does not exist, erase from list failed")
         index = int(children[3].getText()) - 1
         if index < 1 or index > len(self.ids[-1][list_name]):
             raise Exception("L'element està fora del rang entre 1 i n")
@@ -371,7 +371,7 @@ class TreeVisitor(jsbachVisitor):
         children = list(ctx.getChildren())
         list_name = children[0].getText()
         if list_name not in self.ids[-1]:
-            raise Exception("This list does not exist!")
+            raise Exception("This list does not exist, get list size failed")
         list_name = list_name[1:]
         size = len(self.ids[-1][list_name])
         return size
