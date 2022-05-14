@@ -361,7 +361,8 @@ class TreeVisitor(jsbachVisitor):
         list_name = children[1].getText()
         if list_name not in self.ids[-1]:
             raise Exception("The list with name " + list_name + " does not exist, erase from list failed")
-        index = int(children[3].getText()) - 1
+        index = self.visit(children[3])
+        index = int(index) - 1
         if index < 1 or index > len(self.ids[-1][list_name]):
             raise Exception("L'element està fora del rang entre 1 i n")
         self.ids[-1][list_name].pop(index)
@@ -370,9 +371,9 @@ class TreeVisitor(jsbachVisitor):
     def visitGet_list_size(self, ctx: jsbachParser.Get_list_sizeContext):
         children = list(ctx.getChildren())
         list_name = children[0].getText()
+        list_name = list_name[1:]
         if list_name not in self.ids[-1]:
             raise Exception("The list with name " + list_name + " does not exist, get list size failed")
-        list_name = list_name[1:]
         size = len(self.ids[-1][list_name])
         return size
 
@@ -381,6 +382,7 @@ class TreeVisitor(jsbachVisitor):
         children = list(ctx.getChildren())
         list_name = children[0].getText()
         index = self.visit(children[2])
+        index -= 1
         value = self.ids[-1][list_name][index]
         return value
 
