@@ -12,7 +12,6 @@ statement:
 	| declarar_procediment
 	| usar_procediment
 	| while
-	// | expr
 	| assign
 	| erase_from_list
 	| reproduccio
@@ -59,7 +58,6 @@ assign:
 NOTA_ID: ('A0' | 'B0' | [A-G][0-7] | 'C8' | [A-G]);
 FUNCTION_ID:
 	[A-Z] ('A'..'Z'| 'a'..'z' | '_' | '0'..'9')*; // functions start with a capital letter
-//	[A-Z] [a-zA-Z]*; // functions start with a capital letter
 VARIABLE_ID:
 	[a-z] ('A'..'Z'| 'a'..'z' | '_' | '0'..'9')*; // variables start with a lower-case letter
 NUM: [0-9]+;

@@ -99,6 +99,21 @@ class TreeVisitor(jsbachVisitor):
         else:
             raise Exception("El codi no conté el procediment " + str(param))
 
+    def get_values_from_children(self, children):
+        """
+        Returns the numbers from operations with two parameters and the operator from the children.
+        :param children: children nodes of the current node
+        :return: First number, second number, operator
+        """
+        numero1 = self.visit(children[0])
+        numero2 = self.visit(children[2])
+        if isinstance(numero1, str):
+            numero1 = self.ids[-1][numero1]
+        if isinstance(numero2, str):
+            numero2 = self.ids[-1][numero2]
+        op = children[1].getText()
+        return numero1, numero2, op
+
     # Visit a parse tree produced by ExprParser#root.
     def visitRoot(self, ctx: jsbachParser.RootContext):
         children = list(ctx.getChildren())
@@ -180,7 +195,6 @@ class TreeVisitor(jsbachVisitor):
     # Visit a parse tree produced by jsbachParser#lectura.
     def visitLectura(self, ctx: jsbachParser.LecturaContext):
         children = list(ctx.getChildren())
-
         if len(children) == 1:
             print("Error")
         else:
@@ -315,21 +329,6 @@ class TreeVisitor(jsbachVisitor):
                 return 1
             return 0
 
-    def get_values_from_children(self, children):
-        """
-        Returns the numbers from operations with two parameters and the operator from the children.
-        :param children: children nodes of the current node
-        :return: First number, second number, operator
-        """
-        numero1 = self.visit(children[0])
-        numero2 = self.visit(children[2])
-        if isinstance(numero1, str):
-            numero1 = self.ids[-1][numero1]
-        if isinstance(numero2, str):
-            numero2 = self.ids[-1][numero2]
-        op = children[1].getText()
-        return numero1, numero2, op
-
     # Visit a parse tree produced by jsbachParser#parenthesis.
     def visitParenthesis(self, ctx: jsbachParser.ParenthesisContext):
         children = list(ctx.getChildren())
@@ -406,12 +405,10 @@ class TreeVisitor(jsbachVisitor):
             for i in value_nota:
                 if i < 0 or i > len(note_to_int):
                     raise Exception("El valor a reproduir no és una nota!")
-
                 self.notes_a_reproduir.append(i)
         if isinstance(value_nota, int):
             if value_nota < 0 or value_nota > len(note_to_int):
                 raise Exception("El valor a reproduir no és una nota!")
-
             self.notes_a_reproduir.append(value_nota)
 
 
@@ -448,9 +445,10 @@ def main():
         \\midi {} 
     } \" """
         os.system("echo " + lilyfile1 + string_notes + lilyfile2 + " > " + input_file_name + ".lily")
-        os.system("lilypond " + input_file_name + ".lily")  # THIS WORKS
-        os.system("timidity -Ow -o " + input_file_name + ".wav " + input_file_name + ".midi")  # THIS DOESNT
-        os.system("ffmpeg -y -i " + input_file_name + ".wav -codec:a libmp3lame -qscale:a 2 " + input_file_name + ".mp3")
+        os.system("lilypond " + input_file_name + ".lily")
+        os.system("timidity -Ow -o " + input_file_name + ".wav " + input_file_name + ".midi")
+        os.system(
+            "ffmpeg -y -i " + input_file_name + ".wav -codec:a libmp3lame -qscale:a 2 " + input_file_name + ".mp3")
         os.system("mplayer " + input_file_name + ".mp3")
 
 
