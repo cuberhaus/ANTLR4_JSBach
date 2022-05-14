@@ -16,7 +16,9 @@ statement:
 	| assign
 	| erase_from_list
 	| reproduccio
-	| append;
+	| append
+	| newlines
+	;
 
 expr:
 	'(' expr ')'					# parenthesis
