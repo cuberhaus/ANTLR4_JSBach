@@ -382,6 +382,8 @@ class TreeVisitor(jsbachVisitor):
         children = list(ctx.getChildren())
         list_name = children[0].getText()
         index = self.visit(children[2])
+        if index < 1 or index > len(self.ids[-1][list_name]):
+            raise Exception("L'element està fora del rang entre 1 i n")
         index -= 1
         value = self.ids[-1][list_name][index]
         return value
@@ -400,10 +402,17 @@ class TreeVisitor(jsbachVisitor):
             if value_nota not in self.ids[-1]:
                 raise Exception("La variable no existeix!")
             value_nota = self.ids[-1][value_nota]
-        if value_nota < 0 or value_nota > len(note_to_int):
-            raise Exception("El valor a reproduir no és una nota!")
+        if isinstance(value_nota, list):
+            for i in value_nota:
+                if i < 0 or i > len(note_to_int):
+                    raise Exception("El valor a reproduir no és una nota!")
 
-        self.notes_a_reproduir.append(value_nota)
+                self.notes_a_reproduir.append(i)
+        if isinstance(value_nota, int):
+            if value_nota < 0 or value_nota > len(note_to_int):
+                raise Exception("El valor a reproduir no és una nota!")
+
+            self.notes_a_reproduir.append(value_nota)
 
 
 def main():
