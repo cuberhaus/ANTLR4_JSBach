@@ -186,7 +186,8 @@ class TreeVisitor(jsbachVisitor):
     def visitId(self, ctx: jsbachParser.IdContext):
         children = list(ctx.getChildren())
         identifier = children[0].getText()
-        return identifier
+        return self.ids[-1][identifier]
+        # return identifier
 
     # Visit a parse tree produced by jsbachParser#lectura.
     def visitLectura(self, ctx: jsbachParser.LecturaContext):
@@ -212,6 +213,8 @@ class TreeVisitor(jsbachVisitor):
             elif segment.startswith("\"") and segment.endswith("\""):
                 print(segment[1:-1], end=" ")
             elif isinstance(identifier, int):
+                print(identifier, end=" ")
+            elif isinstance(identifier, list):
                 print(identifier, end=" ")
             else:
                 print(self.ids[-1][identifier], end=" ")

@@ -88,7 +88,7 @@ Alle_Schlüssel |:
 PROVA 11 HANOI RECURSIVE
 
 Main |:
-    src <- {C D E F G}
+    src <- {23 24 25 26 27}
     dst <- {}
     aux <- {}
     HanoiRec #src src dst aux
