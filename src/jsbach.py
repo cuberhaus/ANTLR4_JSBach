@@ -22,9 +22,12 @@ def initialize_int_to_note():
     :return: None
     """
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-    commas = [",,,,", ",,,", ",,", ",", "", "'", "''", "'''", "''''"]
-    int_to_note[0] = "a,,,,4"
-    int_to_note[1] = "b,,,,4"
+    # commas = [",,,,", ",,,", ",,", ",", "", "'", "''", "'''", "''''"]
+    commas = [",,,", ",,", ",", "", "'", "''", "'''", "''''", "'''''"]
+    # int_to_note[0] = "a,,,,4"
+    # int_to_note[1] = "b,,,,4"
+    int_to_note[0] = "a" + commas[0] + "4"
+    int_to_note[1] = "b" + commas[0] + "4"
     i = 1
     n = 8
     while i < n:
@@ -34,8 +37,7 @@ def initialize_int_to_note():
             int_to_note[j + ((i - 1) * 7) + 2] = letters[(j + 2) % 7] + commas[i] + "4"
             j += 1
         i += 1
-    # note_to_int["C8"] = 51
-    int_to_note[51] = "c''''4"
+    int_to_note[51] = "c" + commas[8] + "4"
 
 
 def initialize_note_to_int():
