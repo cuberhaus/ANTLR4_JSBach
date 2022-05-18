@@ -37,3 +37,4 @@ jsbachLexer.py
 src/jocs_de_prova/input
 *.tmp
 *README.html
+.DS_Store
