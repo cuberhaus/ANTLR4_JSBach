@@ -35,7 +35,6 @@ crea_llista: '{' expr* '}'; // sense comes
 append: VARIABLE_ID '<<' expr newlines;
 erase_from_list: '8<' VARIABLE_ID '[' expr ']' newlines;
 reproduccio: '<:>' expr newlines;
-//access_list: VARIABLE_ID '[' expr ']';
 
 GET_LIST_SIZE: '#' VARIABLE_ID ;
 
