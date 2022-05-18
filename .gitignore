@@ -35,3 +35,4 @@ jsbachLexer.py
 *.wav
 
 src/jocs_de_prova/input
+.DS_Store
